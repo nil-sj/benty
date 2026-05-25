@@ -1,0 +1,121 @@
+.container {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.score {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  background: var(--color-white);
+  padding: 8px 24px;
+  border-radius: var(--radius-lg);
+  border: 3px solid var(--color-sun);
+  color: var(--color-text-primary);
+}
+
+.question {
+  width: 100%;
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  border: 3px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.prompt {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  color: var(--color-text-primary);
+  text-align: center;
+}
+
+.objectGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding: 8px;
+}
+
+.objectItem {
+  font-size: clamp(36px, 8vw, 56px);
+  animation: popIn 0.3s ease;
+  cursor: default;
+  user-select: none;
+}
+
+.feedbackCorrect {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 4vw, 1.7rem);
+  color: var(--color-mint);
+  text-align: center;
+  animation: bounce-in 0.4s ease;
+  padding: 14px 24px;
+  background: #f0fff4;
+  border-radius: var(--radius-lg);
+  border: 3px solid var(--color-mint);
+}
+
+.feedbackWrong {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 4vw, 1.7rem);
+  color: var(--color-peach);
+  text-align: center;
+  animation: wiggle 0.4s ease;
+  padding: 14px 24px;
+  background: #fff8f0;
+  border-radius: var(--radius-lg);
+  border: 3px solid var(--color-peach);
+}
+
+.numberGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.numBtn {
+  aspect-ratio: 1;
+  background: var(--color-white);
+  border: 3px solid var(--color-sky);
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  color: var(--color-sky);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: var(--shadow-button);
+}
+
+.numBtn:hover {
+  background: var(--color-sky-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-button-hover);
+}
+
+.numBtn:active {
+  transform: translateY(1px);
+}
+
+.correctBtn {
+  background: var(--color-mint) !important;
+  border-color: var(--color-mint) !important;
+  color: white !important;
+}
+
+@media (max-width: 480px) {
+  .numberGrid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+}

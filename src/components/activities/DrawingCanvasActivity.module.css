@@ -1,0 +1,143 @@
+.container {
+  width: 100%;
+  max-width: 940px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-start;
+  background: var(--color-white);
+  padding: 16px 20px;
+  border-radius: var(--radius-xl);
+  border: 3px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+}
+
+.toolSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.toolLabel {
+  font-weight: 800;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-secondary);
+}
+
+.colorRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.colorBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.colorBtn:hover {
+  transform: scale(1.2);
+}
+
+.activeColor {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 3px var(--color-text-primary), 0 2px 6px rgba(0,0,0,0.3) !important;
+}
+
+.sizeRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.sizeBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  border: 3px solid var(--color-border);
+  background: var(--color-bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.sizeBtn:hover {
+  border-color: var(--color-sky);
+}
+
+.activeSize {
+  border-color: var(--color-sky) !important;
+  background: var(--color-sky-light) !important;
+}
+
+.toolRow {
+  display: flex;
+  gap: 8px;
+}
+
+.toolBtn {
+  padding: 10px 16px;
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.toolBtn:hover {
+  background: var(--color-sky-light);
+  border-color: var(--color-sky);
+}
+
+.activeTool {
+  background: var(--color-peach) !important;
+  border-color: var(--color-peach) !important;
+  color: white;
+}
+
+.canvasWrapper {
+  background: white;
+  border-radius: var(--radius-xl);
+  border: 3px solid var(--color-border);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  touch-action: none;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  touch-action: none;
+}
+
+@media (max-width: 600px) {
+  .toolbar {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .colorBtn {
+    width: 30px;
+    height: 30px;
+  }
+}

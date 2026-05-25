@@ -1,0 +1,81 @@
+.container {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.celebration {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 5vw, 2.2rem);
+  color: var(--color-coral);
+  text-align: center;
+  animation: bounce-in 0.5s ease;
+  padding: 16px 24px;
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  border: 3px solid var(--color-sun);
+  box-shadow: var(--shadow-card);
+}
+
+.list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  border: 3px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  transition: all 0.2s ease;
+}
+
+.newest {
+  animation: slideUp 0.35s ease;
+  border-color: var(--color-sky);
+  background: var(--color-sky-light);
+}
+
+.itemEmoji {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.itemName {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  color: var(--color-text-primary);
+  flex: 1;
+}
+
+.itemDetail {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.hint {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  background: var(--color-white);
+  padding: 8px 20px;
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--color-border);
+}
+
+@media (max-width: 480px) {
+  .itemDetail {
+    display: none;
+  }
+}
