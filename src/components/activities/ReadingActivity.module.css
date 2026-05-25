@@ -1,0 +1,42 @@
+.container { width: 100%; max-width: 680px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.modeBar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.modeBtn { padding: 8px 16px; border-radius: var(--radius-lg); border: 3px solid var(--color-border); background: var(--color-white); font-family: var(--font-body); font-weight: 800; font-size: 0.9rem; cursor: pointer; transition: all 0.15s ease; color: var(--color-text-secondary); }
+.modeBtn:hover { border-color: var(--color-sky); }
+.active { background: var(--color-sky) !important; border-color: var(--color-sky) !important; color: white !important; }
+.counter { padding: 6px 14px; background: var(--color-sky-light); border: 2px solid var(--color-sky); border-radius: var(--radius-lg); font-weight: 900; font-size: 0.95rem; margin-left: auto; }
+
+/* CVC */
+.wordCard { width: 100%; background: var(--color-white); border-radius: var(--radius-xl); padding: 28px 24px; border: 3px solid var(--color-border); box-shadow: var(--shadow-card); display: flex; flex-direction: column; align-items: center; gap: 16px; animation: popIn 0.35s ease; }
+.wordEmoji { font-size: clamp(60px, 14vw, 96px); animation: float 3s ease-in-out infinite; }
+.letterRow { display: flex; gap: 10px; }
+.letterBox { width: clamp(56px, 14vw, 80px); height: clamp(56px, 14vw, 80px); display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md); font-family: var(--font-display); font-size: clamp(1.8rem, 6vw, 2.8rem); border: 3px solid; transition: all 0.3s ease; }
+.activeBox { background: var(--color-sky-light); border-color: var(--color-sky); color: var(--color-sky); animation: bounce-in 0.3s ease; }
+.dimBox { background: var(--color-bg); border-color: var(--color-border); color: var(--color-border); }
+.fullWord { font-family: var(--font-display); font-size: clamp(2.5rem, 8vw, 4rem); color: var(--color-coral); animation: bounce-in 0.4s ease; }
+.sentenceBox { font-weight: 700; font-size: clamp(0.9rem, 2.5vw, 1.1rem); color: var(--color-text-secondary); text-align: center; font-style: italic; padding: 10px 16px; background: var(--color-bg); border-radius: var(--radius-md); }
+.blendProgress { display: flex; gap: 8px; }
+.blendDot { padding: 6px 12px; border-radius: var(--radius-md); border: 2px solid var(--color-border); font-size: 0.8rem; font-weight: 800; color: var(--color-text-secondary); transition: all 0.2s ease; }
+.blendDotActive { background: var(--color-mint); border-color: var(--color-mint); color: white; }
+
+/* Sentence reader */
+.sentenceCard { width: 100%; background: var(--color-white); border-radius: var(--radius-xl); padding: 36px 28px; border: 3px solid var(--color-border); box-shadow: var(--shadow-card); display: flex; flex-direction: column; align-items: center; gap: 20px; animation: popIn 0.35s ease; }
+.sentenceEmoji { font-size: clamp(56px, 14vw, 88px); animation: float 3s ease-in-out infinite; }
+.sentenceWords { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.readWord { font-family: var(--font-display); font-size: clamp(1.6rem, 5vw, 2.5rem); color: var(--color-text-primary); padding: 4px 8px; border-radius: var(--radius-sm); transition: all 0.2s ease; border: 3px solid transparent; }
+.highlighted { background: var(--color-sun); border-color: #e8c030; color: var(--color-text-primary); transform: scale(1.15); }
+
+/* Story time */
+.storySelector { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.storyChip { padding: 8px 14px; background: var(--color-white); border: 2px solid var(--color-border); border-radius: var(--radius-lg); font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.15s ease; }
+.storyChip:hover { border-color: var(--color-sky); }
+.storyActive { background: var(--color-sky-light) !important; border-color: var(--color-sky) !important; }
+.storyCard { width: 100%; background: var(--color-white); border-radius: var(--radius-xl); padding: 40px 32px; border: 3px solid var(--color-border); box-shadow: var(--shadow-card); display: flex; flex-direction: column; align-items: center; gap: 20px; min-height: 240px; animation: popIn 0.35s ease; }
+.storyEmoji { font-size: clamp(64px, 16vw, 100px); animation: float 3s ease-in-out infinite; }
+.storyText { font-family: var(--font-display); font-size: clamp(1.5rem, 5vw, 2.2rem); color: var(--color-text-primary); text-align: center; line-height: 1.5; }
+.pageDots { display: flex; gap: 8px; }
+.pageDot { width: 12px; height: 12px; border-radius: 50%; background: var(--color-border); transition: background 0.2s; }
+.pageDotActive { background: var(--color-sky); }
+
+.readBtn { padding: 12px 24px; background: var(--color-sun); border: 3px solid #e8c030; border-radius: var(--radius-lg); font-family: var(--font-body); font-weight: 800; font-size: 1rem; cursor: pointer; transition: all 0.15s ease; box-shadow: var(--shadow-button); }
+.readBtn:hover { transform: translateY(-2px); box-shadow: var(--shadow-button-hover); }
+.tapHint { font-weight: 700; font-size: 0.9rem; color: var(--color-text-secondary); }

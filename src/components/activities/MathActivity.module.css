@@ -1,0 +1,39 @@
+.container { width: 100%; max-width: 700px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.score { font-family: var(--font-display); font-size: 1.3rem; background: var(--color-white); padding: 8px 24px; border-radius: var(--radius-lg); border: 3px solid var(--color-sun); }
+.mathCard { width: 100%; background: var(--color-white); border-radius: var(--radius-xl); padding: 28px 24px; border: 3px solid var(--color-border); box-shadow: var(--shadow-card); display: flex; flex-direction: column; align-items: center; gap: 12px; animation: popIn 0.3s ease; }
+.emojiRow { font-size: clamp(22px, 5vw, 32px); line-height: 1.6; word-break: break-all; text-align: center; max-width: 480px; }
+.operator { font-family: var(--font-display); font-size: clamp(2rem, 8vw, 4rem); color: var(--color-sky); line-height: 1; }
+.equals { font-family: var(--font-display); font-size: clamp(2rem, 8vw, 4rem); color: var(--color-text-secondary); }
+.question { font-family: var(--font-display); font-size: clamp(2.5rem, 10vw, 5rem); color: var(--color-coral); }
+.prompt { font-family: var(--font-display); font-size: clamp(1.1rem, 3vw, 1.5rem); color: var(--color-text-primary); text-align: center; }
+.bigPrompt { font-family: var(--font-display); font-size: clamp(1.3rem, 4vw, 2rem); color: var(--color-text-primary); text-align: center; }
+.fbCorrect { width: 100%; font-family: var(--font-display); font-size: clamp(1rem,3vw,1.3rem); text-align: center; padding: 14px 20px; border-radius: var(--radius-lg); border: 3px solid var(--color-mint); color: var(--color-mint); background: #f0fff4; animation: bounce-in 0.4s ease; }
+.fbWrong { width: 100%; font-family: var(--font-display); font-size: clamp(1rem,3vw,1.3rem); text-align: center; padding: 14px 20px; border-radius: var(--radius-lg); border: 3px solid var(--color-peach); color: var(--color-peach); background: #fff8f0; }
+.numGrid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; width: 100%; max-width: 420px; }
+.numBtn { aspect-ratio: 1; background: var(--color-white); border: 3px solid var(--color-sky); border-radius: var(--radius-md); font-family: var(--font-display); font-size: clamp(1.1rem,3.5vw,1.6rem); color: var(--color-sky); cursor: pointer; transition: all 0.15s ease; box-shadow: var(--shadow-button); }
+.numBtn:hover { background: var(--color-sky-light); transform: translateY(-2px); }
+.numCorrect { background: var(--color-mint) !important; border-color: var(--color-mint) !important; color: white !important; }
+.numWrong { background: var(--color-coral) !important; border-color: var(--color-coral) !important; color: white !important; }
+
+/* Compare */
+.compareRow { display: flex; align-items: center; gap: 16px; width: 100%; }
+.groupBtn { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px 12px; background: var(--color-white); border: 3px solid var(--color-border); border-radius: var(--radius-xl); cursor: pointer; transition: all 0.18s ease; box-shadow: var(--shadow-card); }
+.groupBtn:hover:not(:disabled) { border-color: var(--color-sky); transform: translateY(-3px); }
+.groupBtn:disabled { cursor: default; }
+.groupEmojis { font-size: clamp(18px, 4vw, 26px); line-height: 1.6; text-align: center; word-break: break-all; max-width: 160px; }
+.groupCount { font-family: var(--font-display); font-size: clamp(1.5rem, 5vw, 2.5rem); color: var(--color-sky); }
+.compareVs { font-family: var(--font-display); font-size: clamp(2rem, 7vw, 3.5rem); color: var(--color-lavender); width: 60px; text-align: center; flex-shrink: 0; }
+.correctGroup { background: #f0fff4 !important; border-color: var(--color-mint) !important; animation: bounce-in 0.4s ease; }
+.wrongGroup { background: #fff5f5 !important; border-color: var(--color-coral) !important; opacity: 0.8; }
+.dimGroup { opacity: 0.4; }
+.equalBtn { padding: 12px 28px; border: 3px solid var(--color-sky); border-radius: var(--radius-lg); background: var(--color-white); font-family: var(--font-display); font-size: 1.2rem; cursor: pointer; }
+
+/* Pattern */
+.patternCard { width: 100%; background: var(--color-white); border-radius: var(--radius-xl); padding: 28px 20px; border: 3px solid var(--color-border); box-shadow: var(--shadow-card); display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.patternHint { font-weight: 700; font-size: 0.9rem; color: var(--color-text-secondary); }
+.patternRow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.patternItem { font-size: clamp(28px, 7vw, 44px); }
+.patternNext { font-size: clamp(28px, 7vw, 44px); min-width: 50px; text-align: center; background: var(--color-sky-light); border-radius: var(--radius-sm); padding: 4px 8px; border: 3px dashed var(--color-sky); }
+.optGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 400px; }
+.optBtn { padding: 18px; background: var(--color-white); border: 3px solid var(--color-border); border-radius: var(--radius-lg); font-size: clamp(24px, 7vw, 40px); cursor: pointer; transition: all 0.15s ease; box-shadow: var(--shadow-button); }
+.optBtn:hover { border-color: var(--color-sky); transform: translateY(-2px); }

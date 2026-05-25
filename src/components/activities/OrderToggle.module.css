@@ -1,0 +1,48 @@
+.toggleBar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.toggleLabel {
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.modeBtn {
+  padding: 8px 16px;
+  border-radius: var(--radius-lg);
+  border: 3px solid var(--color-border);
+  background: var(--color-white);
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: var(--color-text-secondary);
+}
+
+.modeBtn:hover {
+  border-color: var(--color-sky);
+  color: var(--color-text-primary);
+}
+
+.active {
+  background: var(--color-sky) !important;
+  border-color: var(--color-sky) !important;
+  color: white !important;
+}
+
+.counter {
+  padding: 6px 14px;
+  background: var(--color-sky-light);
+  border: 2px solid var(--color-sky);
+  border-radius: var(--radius-lg);
+  font-weight: 900;
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+  margin-left: auto;
+}
