@@ -1,0 +1,157 @@
+.container {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.scorebar {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  background: var(--color-white);
+  padding: 10px 20px;
+  border-radius: var(--radius-lg);
+  border: 3px solid var(--color-border);
+}
+
+.celebration {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  color: var(--color-coral);
+  text-align: center;
+  animation: bounce-in 0.5s ease;
+  padding: 16px 24px;
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  border: 3px solid var(--color-sun);
+  box-shadow: var(--shadow-card);
+}
+
+.instruction {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: 1fr 24px 1fr;
+  gap: 0;
+  width: 100%;
+  align-items: start;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.connector {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  padding-top: 22px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-border);
+  transition: background 0.3s ease;
+  flex-shrink: 0;
+  margin: 12px 0;
+}
+
+.dotMatched {
+  background: var(--color-mint);
+}
+
+.leftCard, .rightCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 12px;
+  background: var(--color-white);
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  min-height: 64px;
+  position: relative;
+}
+
+.leftCard:hover:not(:disabled),
+.rightCard:hover:not(:disabled) {
+  border-color: var(--color-sky);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(110,198,245,0.3);
+}
+
+.leftCard:disabled, .rightCard:disabled {
+  cursor: default;
+}
+
+.bigEmoji {
+  font-size: clamp(28px, 7vw, 40px);
+}
+
+.itemName {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  color: var(--color-text-primary);
+}
+
+.matchedCard {
+  background: #f0fff4 !important;
+  border-color: var(--color-mint) !important;
+  animation: bounce-in 0.4s ease;
+}
+
+.selectedCard {
+  background: var(--color-sky-light) !important;
+  border-color: var(--color-sky) !important;
+  box-shadow: 0 0 0 4px rgba(110,198,245,0.3) !important;
+}
+
+.wrongCard {
+  background: #fff5f5 !important;
+  border-color: var(--color-coral) !important;
+  animation: wiggle 0.3s ease;
+}
+
+.checkmark {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  background: var(--color-mint);
+  border-radius: 50%;
+  color: white;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 400px) {
+  .board {
+    grid-template-columns: 1fr 16px 1fr;
+  }
+}

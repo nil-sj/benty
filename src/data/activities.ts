@@ -11,7 +11,11 @@ export type ComponentType =
   | 'multiple-choice-quiz'
   | 'open-quiz'
   | 'sight-word'
-  | 'word-spinner';
+  | 'word-spinner'
+  | 'animal-sounds'
+  | 'memory-card'
+  | 'rhyme-finder'
+  | 'first-letter';
 
 export type NavigationMode = 'sequential' | 'random';
 export type LayoutMode = 'single-column' | 'two-column' | 'grid' | 'canvas' | 'quiz' | 'matching' | 'music-album';
@@ -301,6 +305,61 @@ export const activities: ActivityConfig[] = [
     dataSource: 'wordFamilies',
     navigationMode: 'random',
     layout: 'single-column',
+    voiceEnabled: true,
+  },
+
+  // Phase 2 games
+  {
+    id: 'animal-sounds',
+    title: 'Animal Sounds',
+    category: 'Games & Puzzles',
+    icon: '🔊',
+    description: 'What does the cow say? Find out!',
+    route: '/activity/animal-sounds',
+    componentType: 'animal-sounds' as const,
+    dataSource: '',
+    navigationMode: 'random' as const,
+    layout: 'quiz' as const,
+    voiceEnabled: true,
+  },
+  {
+    id: 'memory-card',
+    title: 'Memory Card Game',
+    category: 'Games & Puzzles',
+    icon: '🃏',
+    description: 'Flip and match the pairs!',
+    route: '/activity/memory-card',
+    componentType: 'memory-card' as const,
+    dataSource: '',
+    navigationMode: 'random' as const,
+    layout: 'grid' as const,
+    voiceEnabled: true,
+  },
+  // Phase 3 reading
+  {
+    id: 'rhyme-finder',
+    title: 'Rhyme Finder',
+    category: 'Words & Reading',
+    icon: '🎵',
+    description: 'Which word rhymes with cat?',
+    route: '/activity/rhyme-finder',
+    componentType: 'rhyme-finder' as const,
+    dataSource: '',
+    navigationMode: 'random' as const,
+    layout: 'quiz' as const,
+    voiceEnabled: true,
+  },
+  {
+    id: 'first-letter',
+    title: 'First Letter',
+    category: 'Words & Reading',
+    icon: '🔡',
+    description: 'What letter does it start with?',
+    route: '/activity/first-letter',
+    componentType: 'first-letter' as const,
+    dataSource: '',
+    navigationMode: 'random' as const,
+    layout: 'quiz' as const,
     voiceEnabled: true,
   },
 ];

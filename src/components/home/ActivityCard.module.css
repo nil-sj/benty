@@ -71,3 +71,13 @@
   opacity: 1;
   transform: translateX(0);
 }
+
+.cardWrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cardWrapper .card {
+  flex: 1;
+}

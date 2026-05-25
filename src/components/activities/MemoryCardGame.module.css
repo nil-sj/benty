@@ -1,0 +1,87 @@
+.container {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.stats {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  background: var(--color-white);
+  padding: 10px 20px;
+  border-radius: var(--radius-lg);
+  border: 3px solid var(--color-border);
+}
+.restartBtn {
+  padding: 8px 16px;
+  background: var(--color-sky-light);
+  border: 2px solid var(--color-sky);
+  border-radius: var(--radius-md);
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.restartBtn:hover { background: var(--color-sky); color: white; }
+.winBanner {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 3.5vw, 1.6rem);
+  color: var(--color-coral);
+  text-align: center;
+  animation: bounce-in 0.5s ease;
+  padding: 16px 24px;
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  border: 3px solid var(--color-sun);
+  box-shadow: var(--shadow-card);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+.card {
+  aspect-ratio: 1;
+  border-radius: var(--radius-lg);
+  border: 3px solid;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-button);
+  font-size: 0;
+}
+.card:hover:not(:disabled) { transform: scale(1.05); }
+.cardBack {
+  background: linear-gradient(135deg, var(--color-sky), var(--color-lavender));
+  border-color: var(--color-sky);
+}
+.cardFront {
+  background: var(--color-white);
+  border-color: var(--color-sky);
+  animation: popIn 0.3s ease;
+}
+.cardMatched {
+  background: #f0fff4 !important;
+  border-color: var(--color-mint) !important;
+}
+.cardInner {
+  font-size: clamp(24px, 7vw, 44px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+@media (max-width: 480px) {
+  .grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+}

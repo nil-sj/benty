@@ -1,0 +1,111 @@
+.container {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.question {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 4vw, 2rem);
+  color: var(--color-text-primary);
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  width: 100%;
+}
+
+.optionBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 16px;
+  background: var(--color-white);
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  box-shadow: var(--shadow-card);
+  position: relative;
+}
+
+.optionBtn:hover:not(:disabled) {
+  border-color: var(--color-sky);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(110,198,245,0.3);
+}
+
+.optionBtn:disabled { cursor: default; }
+
+.oddBtn {
+  border-color: var(--color-coral) !important;
+  background: #fff5f5 !important;
+  animation: bounce-in 0.4s ease;
+}
+
+.wrongBtn {
+  border-color: var(--color-peach) !important;
+  background: #fff8f0 !important;
+  animation: wiggle 0.3s ease;
+  opacity: 0.7;
+}
+
+.dimBtn { opacity: 0.45; }
+
+.optLabel {
+  position: absolute;
+  top: 10px;
+  left: 14px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-sky);
+  color: white;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.optEmoji {
+  font-size: clamp(36px, 10vw, 56px);
+  animation: float 3s ease-in-out infinite;
+}
+
+.optName {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  color: var(--color-text-primary);
+}
+
+.feedback {
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+  text-align: center;
+  padding: 14px 20px;
+  border-radius: var(--radius-lg);
+  border: 3px solid;
+  line-height: 1.4;
+}
+
+.feedbackCorrect {
+  color: var(--color-mint);
+  background: #f0fff4;
+  border-color: var(--color-mint);
+  animation: bounce-in 0.4s ease;
+}
+
+.feedbackWrong {
+  color: var(--color-peach);
+  background: #fff8f0;
+  border-color: var(--color-peach);
+}
