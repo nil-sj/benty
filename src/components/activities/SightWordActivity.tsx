@@ -12,7 +12,7 @@ interface SightWordProps {
 export function SightWordActivity({ config }: SightWordProps) {
   const [index, setIndex] = useState(0);
   const [showSentence, setShowSentence] = useState(false);
-  const { sayText, repeat } = useSpeech(config.voiceEnabled);
+  const { sayText, repeat, isEnabled, toggle } = useSpeech(config.voiceEnabled);
 
   const current = sightWordsData[index];
 
@@ -46,6 +46,9 @@ export function SightWordActivity({ config }: SightWordProps) {
       canGoNext={index < sightWordsData.length - 1}
       progressCurrent={index + 1}
       progressTotal={sightWordsData.length}
+    
+      voiceEnabled={isEnabled}
+      onToggleVoice={toggle}
     >
       <div className={styles.container}>
         <div className={styles.wordCard} onClick={repeat} role="button" tabIndex={0} aria-label={`Sight word: ${current.word}. Click to hear it.`}>

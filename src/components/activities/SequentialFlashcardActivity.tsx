@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ActivityShell } from '../layout/ActivityShell';
 import { useSpeech } from '../../hooks/useSpeech';
 import type { ActivityConfig } from '../../data/activities';
@@ -13,16 +13,12 @@ interface SequentialFlashcardProps {
 function getDataForSource(dataSource: string) {
   switch (dataSource) {
     case 'alphabet': return alphabetData;
-    case 'numbers': return numbersData;
+    case 'numbers': return numbersData.slice(0, 10);   // 1-10
+    case 'numbers20': return numbersData;               // 1-20
     case 'shapes': return shapesData;
     case 'colors': return colorsData;
     default: return alphabetData;
   }
-}
-
-function getDisplayEmoji(item: any): string {
-  if (item.emoji) return item.emoji as string;
-  return '❓';
 }
 
 function getAudioText(item: any): string {
@@ -34,7 +30,7 @@ function getAudioText(item: any): string {
 
 function getPrimaryText(item: any, dataSource: string): string {
   if (dataSource === 'alphabet') return item.letter as string;
-  if (dataSource === 'numbers') return String(item.number);
+  if (dataSource === 'numbers' || dataSource === 'numbers20') return String(item.number);
   return (item.name || item.word || '') as string;
 }
 
@@ -51,6 +47,7 @@ function getAccentColor(dataSource: string, item: any): string {
   const colorMap: Record<string, string> = {
     alphabet: 'var(--color-sky)',
     numbers: 'var(--color-coral)',
+    numbers20: 'var(--color-coral)',
     shapes: 'var(--color-lavender)',
   };
   return colorMap[dataSource] || 'var(--color-sky)';
@@ -61,16 +58,23 @@ export function SequentialFlashcardActivity({ config }: SequentialFlashcardProps
   const items = getDataForSource(config.dataSource) as any[];
   const [index, setIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  const { sayText, repeat } = useSpeech(config.voiceEnabled);
+  const { sayText, repeat, isEnabled, toggle } = useSpeech(config.voiceEnabled);
 
   const current = items[index];
 
-  useEffect(() => {
-    const text = getAudioText(current);
-    if (text) {
-      const timer = setTimeout(() => sayText(text), 300);
-      return () => clearTimeout(timer);
+  const speakItem = useCallback((item: any) => {
+    const mainText = getAudioText(item);
+    const funFact = getFunFact(item);
+    if (mainText) sayText(mainText);
+    if (funFact) {
+      // Pause then read fun fact
+      setTimeout(() => sayText(funFact), 2000);
     }
+  }, [sayText]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => speakItem(current), 300);
+    return () => clearTimeout(timer);
   }, [index]);
 
   const goNext = () => {
@@ -91,7 +95,6 @@ export function SequentialFlashcardActivity({ config }: SequentialFlashcardProps
 
   const primaryText = getPrimaryText(current, config.dataSource);
   const secondaryText = getSecondaryText(current);
-  const emoji = getDisplayEmoji(current);
   const funFact = getFunFact(current);
   const accentColor = getAccentColor(config.dataSource, current);
 
@@ -107,10 +110,11 @@ export function SequentialFlashcardActivity({ config }: SequentialFlashcardProps
       nextLabel={index === items.length - 1 ? '✓ Done' : 'Next →'}
       progressCurrent={index + 1}
       progressTotal={items.length}
+      voiceEnabled={isEnabled}
+      onToggleVoice={toggle}
     >
       <div className={`${styles.card} ${isAnimating ? styles.animating : ''}`} style={{ '--accent': accentColor } as React.CSSProperties}>
         <div className={styles.cardInner}>
-          {/* Left: visual */}
           <div className={styles.visualSide}>
             <div className={styles.emojiDisplay} aria-label={secondaryText || primaryText}>
               {config.dataSource === 'colors' ? (
@@ -120,12 +124,10 @@ export function SequentialFlashcardActivity({ config }: SequentialFlashcardProps
                   aria-label={(current.name as string) + ' color swatch'}
                 />
               ) : (
-                <span>{emoji}</span>
+                <span>{current.emoji || '🔤'}</span>
               )}
             </div>
           </div>
-
-          {/* Right: text content */}
           <div className={styles.textSide}>
             <div className={styles.primaryText} style={{ color: accentColor }}>
               {primaryText}
@@ -139,12 +141,7 @@ export function SequentialFlashcardActivity({ config }: SequentialFlashcardProps
                 <span>{funFact}</span>
               </div>
             )}
-            <button
-              className={styles.speakBtn}
-              onClick={repeat}
-              aria-label="Say it again"
-              title="Hear again (Space)"
-            >
+            <button className={styles.speakBtn} onClick={repeat} aria-label="Say it again" title="Hear again (Space)">
               🔊 Say it again!
             </button>
           </div>

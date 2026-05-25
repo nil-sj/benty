@@ -23,7 +23,7 @@ export function ProgressiveListActivity({ config }: ProgressiveListProps) {
   const items = getDataForSource(config.dataSource);
   const [revealed, setRevealed] = useState(1);
   const [celebrating, setCelebrating] = useState(false);
-  const { sayText } = useSpeech(config.voiceEnabled);
+  const { sayText, isEnabled, toggle } = useSpeech(config.voiceEnabled);
 
   useEffect(() => {
     const item = items[revealed - 1];
@@ -64,6 +64,9 @@ export function ProgressiveListActivity({ config }: ProgressiveListProps) {
       nextLabel={revealed >= items.length ? '🎉 Review All' : 'Next →'}
       progressCurrent={revealed}
       progressTotal={items.length}
+    
+      voiceEnabled={isEnabled}
+      onToggleVoice={toggle}
     >
       <div className={styles.container}>
         {celebrating && (

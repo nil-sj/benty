@@ -20,7 +20,7 @@ export function CountingActivity({ config }: CountingActivityProps) {
   const [feedback, setFeedback] = useState<FeedbackState>('idle');
   const [score, setScore] = useState(0);
   const [attempts, setAttempts] = useState(0);
-  const { sayText } = useSpeech(config.voiceEnabled);
+  const { sayText, isEnabled, toggle } = useSpeech(config.voiceEnabled);
 
   const prompt = `Can you count the ${object.plural}?`;
 
@@ -63,6 +63,9 @@ export function CountingActivity({ config }: CountingActivityProps) {
       icon={config.icon}
       onRepeat={speakPrompt}
       showNavigation={false}
+    
+      voiceEnabled={isEnabled}
+      onToggleVoice={toggle}
     >
       <div className={styles.container}>
         {/* Score */}

@@ -46,7 +46,7 @@ export function OddManOutActivity({ config }: OddManOutProps) {
   const [round, setRound] = useState<Round>(buildRound);
   const [selected, setSelected] = useState<number | null>(null);
   const [state, setState] = useState<State>('asking');
-  const { sayText, repeat } = useSpeech(config.voiceEnabled);
+  const { sayText, repeat, isEnabled, toggle } = useSpeech(config.voiceEnabled);
   const { recordActivity } = useProgress();
 
   useEffect(() => {
@@ -96,6 +96,9 @@ export function OddManOutActivity({ config }: OddManOutProps) {
       onRepeat={repeat}
       canGoNext={state !== 'asking'}
       nextLabel="Next Round →"
+    
+      voiceEnabled={isEnabled}
+      onToggleVoice={toggle}
     >
       <div className={styles.container}>
         <p className={styles.question}>Which one does NOT belong?</p>

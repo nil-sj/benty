@@ -37,7 +37,7 @@ export function MemoryCardGame({ config }: MemoryCardGameProps) {
   const [locked, setLocked] = useState(false);
   const [moves, setMoves] = useState(0);
   const [matches, setMatches] = useState(0);
-  const { sayText } = useSpeech(config.voiceEnabled);
+  const { sayText, isEnabled, toggle } = useSpeech(config.voiceEnabled);
   const { recordActivity } = useProgress();
 
   const total = cards.length / 2;
@@ -102,6 +102,9 @@ export function MemoryCardGame({ config }: MemoryCardGameProps) {
       title={config.title}
       icon={config.icon}
       showNavigation={false}
+    
+      voiceEnabled={isEnabled}
+      onToggleVoice={toggle}
     >
       <div className={styles.container}>
         <div className={styles.stats}>

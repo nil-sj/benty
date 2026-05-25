@@ -20,7 +20,7 @@ export function MissingLetterActivity({ config }: MissingLetterProps) {
   const [wrongGuess, setWrongGuess] = useState('');
   const [score, setScore] = useState(0);
   const [total, setTotal] = useState(0);
-  const { sayText, repeat } = useSpeech(config.voiceEnabled);
+  const { sayText, repeat, isEnabled, toggle } = useSpeech(config.voiceEnabled);
   const { recordActivity } = useProgress();
 
   const word = item.word.toUpperCase();
@@ -80,6 +80,9 @@ export function MissingLetterActivity({ config }: MissingLetterProps) {
       onNext={() => setupNew()}
       onRepeat={repeat}
       nextLabel="Skip →"
+    
+      voiceEnabled={isEnabled}
+      onToggleVoice={toggle}
     >
       <div className={styles.container}>
         <div className={styles.score}>⭐ {score} / {total}</div>

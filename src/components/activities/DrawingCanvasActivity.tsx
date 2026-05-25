@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ActivityShell } from '../layout/ActivityShell';
+import { useSpeech } from '../../hooks/useSpeech';
 import type { ActivityConfig } from '../../data/activities';
 import styles from './DrawingCanvasActivity.module.css';
 
@@ -26,6 +27,7 @@ export function DrawingCanvasActivity({ config }: DrawingCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [color, setColor] = useState('#3B82F6');
   const [brushSize, setBrushSize] = useState(10);
+  const { isEnabled, toggle } = useSpeech(config.voiceEnabled);
   const [isEraser, setIsEraser] = useState(false);
   const [isDrawing, setIsDrawing] = useState(false);
   const lastPos = useRef<{ x: number; y: number } | null>(null);
@@ -112,7 +114,9 @@ export function DrawingCanvasActivity({ config }: DrawingCanvasProps) {
       title={config.title}
       icon={config.icon}
       showNavigation={false}
-    >
+    
+      voiceEnabled={isEnabled}
+      onToggleVoice={toggle}>
       <div className={styles.container}>
         {/* Toolbar */}
         <div className={styles.toolbar}>

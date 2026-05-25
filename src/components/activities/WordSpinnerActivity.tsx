@@ -12,7 +12,7 @@ interface WordSpinnerProps {
 export function WordSpinnerActivity({ config }: WordSpinnerProps) {
   const [familyIndex, setFamilyIndex] = useState(0);
   const [letterIndex, setLetterIndex] = useState(0);
-  const { sayText } = useSpeech(config.voiceEnabled);
+  const { sayText, isEnabled, toggle } = useSpeech(config.voiceEnabled);
 
   const family = wordFamiliesData[familyIndex];
   const currentLetter = family.startingLetters[letterIndex];
@@ -47,6 +47,9 @@ export function WordSpinnerActivity({ config }: WordSpinnerProps) {
       canGoNext={true}
       nextLabel="Spin → "
       prevLabel="← Spin"
+    
+      voiceEnabled={isEnabled}
+      onToggleVoice={toggle}
     >
       <div className={styles.container}>
         <div className={styles.wordDisplay}>

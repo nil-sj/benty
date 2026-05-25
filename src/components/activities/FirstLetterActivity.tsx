@@ -22,7 +22,7 @@ export function FirstLetterActivity({ config }: FirstLetterProps) {
   const [selected, setSelected] = useState<string | null>(null);
   const [score, setScore] = useState(0);
   const [total, setTotal] = useState(0);
-  const { sayText, repeat } = useSpeech(config.voiceEnabled);
+  const { sayText, repeat, isEnabled, toggle } = useSpeech(config.voiceEnabled);
   const { recordActivity } = useProgress();
 
   const correct = item.name[0].toUpperCase();
@@ -73,6 +73,9 @@ export function FirstLetterActivity({ config }: FirstLetterProps) {
       onNext={() => setupNew()}
       onRepeat={repeat}
       nextLabel="Skip →"
+    
+      voiceEnabled={isEnabled}
+      onToggleVoice={toggle}
     >
       <div className={styles.container}>
         <div className={styles.score}>⭐ {score} / {total}</div>

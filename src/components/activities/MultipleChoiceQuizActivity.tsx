@@ -19,7 +19,7 @@ export function MultipleChoiceQuizActivity({ config }: MultipleChoiceProps) {
   const [answerState, setAnswerState] = useState<AnswerState>('unanswered');
   const [score, setScore] = useState(0);
   const [total, setTotal] = useState(0);
-  const { sayText, repeat } = useSpeech(config.voiceEnabled);
+  const { sayText, repeat, isEnabled, toggle } = useSpeech(config.voiceEnabled);
 
   useEffect(() => {
     setShuffledOptions(shuffle(current.options));
@@ -66,6 +66,9 @@ export function MultipleChoiceQuizActivity({ config }: MultipleChoiceProps) {
         const idx = optionLabels.indexOf(key);
         if (idx !== -1) handleAnswer(idx);
       }}
+    
+      voiceEnabled={isEnabled}
+      onToggleVoice={toggle}
     >
       <div className={styles.container}>
         {/* Score */}

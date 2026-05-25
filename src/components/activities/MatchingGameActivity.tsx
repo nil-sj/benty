@@ -32,7 +32,7 @@ export function MatchingGameActivity({ config }: MatchingGameProps) {
   const [wrongPair, setWrongPair] = useState<[string, string] | null>(null);
   const [score, setScore] = useState(0);
   const [rounds, setRounds] = useState(0);
-  const { sayText, repeat } = useSpeech(config.voiceEnabled);
+  const { sayText, repeat, isEnabled, toggle } = useSpeech(config.voiceEnabled);
   const { recordActivity } = useProgress();
 
   useEffect(() => {
@@ -101,6 +101,9 @@ export function MatchingGameActivity({ config }: MatchingGameProps) {
       canGoNext={allMatched}
       nextLabel="New Round →"
       showRepeat={false}
+    
+      voiceEnabled={isEnabled}
+      onToggleVoice={toggle}
     >
       <div className={styles.container}>
         <div className={styles.scorebar}>

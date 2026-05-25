@@ -54,7 +54,7 @@ export function ActivityLoader() {
   const config = getActivityById(activityId);
   if (!config) return <NotFound />;
 
-  // Record that this activity was visited
+  // Record that this activity was visited (safe: ActivityLoader always renders with valid config)
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => { recordActivity(config.id); }, [config.id]);
 

@@ -122,3 +122,44 @@
     gap: 12px;
   }
 }
+
+.lyricsPanel {
+  width: 100%;
+  max-width: 700px;
+  background: linear-gradient(135deg, #f5eeff, #e8f5ff);
+  border: 3px solid var(--color-lavender);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  animation: slideUp 0.3s ease;
+  box-shadow: 0 4px 24px rgba(199,125,255,0.2);
+}
+
+.lyricsBars {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 32px;
+}
+
+.lyricsBars span {
+  width: 6px;
+  background: var(--color-lavender);
+  border-radius: 3px;
+  animation: musicBar 0.5s ease-in-out infinite alternate;
+}
+.lyricsBars span:nth-child(2) { animation-delay: 0.1s; }
+.lyricsBars span:nth-child(3) { animation-delay: 0.2s; height: 28px; }
+.lyricsBars span:nth-child(4) { animation-delay: 0.3s; }
+.lyricsBars span:nth-child(5) { animation-delay: 0.15s; }
+
+.lyricsText {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  color: var(--color-text-primary);
+  text-align: center;
+  line-height: 1.7;
+}

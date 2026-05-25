@@ -21,6 +21,9 @@ interface ActivityShellProps {
   onAnswer?: (key: string) => void;
   progressCurrent?: number;
   progressTotal?: number;
+  // Voice toggle
+  voiceEnabled?: boolean;
+  onToggleVoice?: () => void;
 }
 
 export function ActivityShell({
@@ -39,56 +42,52 @@ export function ActivityShell({
   onAnswer,
   progressCurrent,
   progressTotal,
+  voiceEnabled,
+  onToggleVoice,
 }: ActivityShellProps) {
   const navigate = useNavigate();
-
   const handleHome = () => navigate('/');
 
-  useKeyboardShortcuts({
-    onNext,
-    onPrevious,
-    onHome: handleHome,
-    onRepeat,
-    onAnswer,
-  });
+  useKeyboardShortcuts({ onNext, onPrevious, onHome: handleHome, onRepeat, onAnswer });
 
-  // Scroll to top when activity loads
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
     <div className={styles.shell}>
-      {/* Top bar */}
       <header className={styles.topBar}>
         <HomeButton />
         <div className={styles.titleArea}>
           <span className={styles.titleIcon} aria-hidden="true">{icon}</span>
           <h1 className={styles.title}>{title}</h1>
         </div>
-        {progressTotal !== undefined && progressCurrent !== undefined && (
-          <div className={styles.progressBadge} aria-label={`Item ${progressCurrent} of ${progressTotal}`}>
-            {progressCurrent} / {progressTotal}
-          </div>
-        )}
+        <div className={styles.topRight}>
+          {onToggleVoice !== undefined && (
+            <button
+              className={`${styles.voiceToggle} ${voiceEnabled ? styles.voiceOn : styles.voiceOff}`}
+              onClick={onToggleVoice}
+              aria-label={voiceEnabled ? 'Mute voice' : 'Unmute voice'}
+              aria-pressed={voiceEnabled}
+              title={voiceEnabled ? 'Mute voice' : 'Enable voice'}
+            >
+              {voiceEnabled ? '🔊' : '🔇'}
+            </button>
+          )}
+          {progressTotal !== undefined && progressCurrent !== undefined && (
+            <div className={styles.progressBadge} aria-label={`Item ${progressCurrent} of ${progressTotal}`}>
+              {progressCurrent} / {progressTotal}
+            </div>
+          )}
+        </div>
       </header>
 
-      {/* Progress bar */}
       {progressTotal !== undefined && progressCurrent !== undefined && (
         <div className={styles.progressBarWrap} role="progressbar" aria-valuenow={progressCurrent} aria-valuemin={1} aria-valuemax={progressTotal}>
-          <div
-            className={styles.progressBarFill}
-            style={{ width: `${(progressCurrent / progressTotal) * 100}%` }}
-          />
+          <div className={styles.progressBarFill} style={{ width: `${(progressCurrent / progressTotal) * 100}%` }} />
         </div>
       )}
 
-      {/* Main content */}
-      <main className={styles.main}>
-        {children}
-      </main>
+      <main className={styles.main}>{children}</main>
 
-      {/* Bottom navigation */}
       {showNavigation && (
         <footer className={styles.footer}>
           <NavigationControls
