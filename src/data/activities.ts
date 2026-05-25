@@ -25,7 +25,16 @@ export type ComponentType =
   | 'phonics'
   | 'cvc-words'
   | 'sentence-reader'
-  | 'story-time';
+  | 'story-time'
+  | 'emotions'
+  | 'weather'
+  | 'family'
+  | 'routines'
+  | 'nature-colors'
+  | 'senses'
+  | 'directions'
+  | 'sizes'
+  | 'healthy-eating';
 
 export type NavigationMode = 'sequential' | 'random';
 export type LayoutMode = 'single-column' | 'two-column' | 'grid' | 'canvas' | 'quiz' | 'matching' | 'music-album';
@@ -583,6 +592,134 @@ export const activities: ActivityConfig[] = [
     dataSource: 'stories',
     navigationMode: 'sequential' as const,
     layout: 'single-column' as const,
+    voiceEnabled: true,
+  },
+
+  // ── New: Emotions & Feelings ──
+  {
+    id: 'emotions',
+    title: 'Emotions & Feelings',
+    category: 'Learn Basics',
+    icon: '😄',
+    description: 'Happy, sad, angry, scared — learn all your feelings!',
+    route: '/activity/emotions',
+    componentType: 'emotions' as const,
+    dataSource: 'emotions',
+    navigationMode: 'sequential' as const,
+    layout: 'two-column' as const,
+    voiceEnabled: true,
+  },
+  // ── New: Weather ──
+  {
+    id: 'weather',
+    title: 'Weather',
+    category: 'Learn Things Around Us',
+    icon: '🌤️',
+    description: 'Sunny, rainy, snowy — learn all about the weather!',
+    route: '/activity/weather',
+    componentType: 'weather' as const,
+    dataSource: 'weather',
+    navigationMode: 'sequential' as const,
+    layout: 'two-column' as const,
+    voiceEnabled: true,
+  },
+  // ── New: My Family ──
+  {
+    id: 'my-family',
+    title: 'My Family',
+    category: 'Learn Things Around Us',
+    icon: '👨‍👩‍👧',
+    description: 'Mum, dad, grandma, grandpa — meet the whole family!',
+    route: '/activity/my-family',
+    componentType: 'family' as const,
+    dataSource: 'family',
+    navigationMode: 'sequential' as const,
+    layout: 'two-column' as const,
+    voiceEnabled: true,
+  },
+  // ── New: Daily Routines ──
+  {
+    id: 'daily-routines',
+    title: 'Daily Routines',
+    category: 'Learn Basics',
+    icon: '🌅',
+    description: 'Brush teeth, eat breakfast, wash hands — daily habits!',
+    route: '/activity/daily-routines',
+    componentType: 'routines' as const,
+    dataSource: 'routines',
+    navigationMode: 'sequential' as const,
+    layout: 'two-column' as const,
+    voiceEnabled: true,
+  },
+  // ── New: Colours in Nature ──
+  {
+    id: 'nature-colors',
+    title: 'Colours in Nature',
+    category: 'Learn Things Around Us',
+    icon: '🌈',
+    description: 'Find every colour hiding in the natural world!',
+    route: '/activity/nature-colors',
+    componentType: 'nature-colors' as const,
+    dataSource: 'nature',
+    navigationMode: 'sequential' as const,
+    layout: 'two-column' as const,
+    voiceEnabled: true,
+  },
+
+  // ── Five Senses ──
+  {
+    id: 'five-senses',
+    title: 'The Five Senses',
+    category: 'Learn Basics',
+    icon: '👁️',
+    description: 'See, hear, touch, taste, smell — discover your five senses!',
+    route: '/activity/five-senses',
+    componentType: 'senses' as const,
+    dataSource: 'senses',
+    navigationMode: 'sequential' as const,
+    layout: 'two-column' as const,
+    voiceEnabled: true,
+  },
+  // ── Directions ──
+  {
+    id: 'directions',
+    title: 'Directions & Positions',
+    category: 'Learn Basics',
+    icon: '🧭',
+    description: 'Left, right, up, down, beside, between — find your way!',
+    route: '/activity/directions',
+    componentType: 'directions' as const,
+    dataSource: 'directions',
+    navigationMode: 'sequential' as const,
+    layout: 'two-column' as const,
+    voiceEnabled: true,
+  },
+  // ── Sizes & Comparisons ──
+  {
+    id: 'sizes',
+    title: 'Big, Bigger, Biggest!',
+    category: 'Learn Basics',
+    icon: '📏',
+    description: 'Compare sizes, heights, speeds, and more!',
+    route: '/activity/sizes',
+    componentType: 'sizes' as const,
+    dataSource: 'sizes',
+    navigationMode: 'sequential' as const,
+    layout: 'two-column' as const,
+    voiceEnabled: true,
+  },
+  // ── Healthy Eating ──
+  {
+    id: 'healthy-eating',
+    title: 'Healthy Eating',
+    category: 'Learn Basics',
+    icon: '🥗',
+    description: 'Learn about food groups and why healthy food keeps you strong!',
+    route: '/activity/healthy-eating',
+    componentType: 'healthy-eating' as const,
+    dataSource: 'food',
+    navigationMode: 'sequential' as const,
+    layout: 'two-column' as const,
     voiceEnabled: true,
   },
 

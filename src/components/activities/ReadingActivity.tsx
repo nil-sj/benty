@@ -94,29 +94,36 @@ export function CVCWordActivity({ config }: ReadingProps) {
 
 // ─── Simple Sentence Reader ───────────────────────────────────────────────────
 export function SentenceReaderActivity({ config }: ReadingProps) {
-  const [items] = useState(() => simpleSentencesData);
+  const [level, setLevel] = useState<1|2|3>(1);
+  const items = simpleSentencesData.filter(s => s.level === level);
   const [index, setIndex] = useState(0);
   const [highlightWord, setHighlightWord] = useState(-1);
   const { sayText, isEnabled, toggle } = useSpeech(config.voiceEnabled);
 
-  const current = items[index];
+  const current = items[Math.min(index, items.length - 1)];
 
   const readSentence = () => {
-    // Highlight each word as we read
     current.words.forEach((word, i) => {
       setTimeout(() => {
         setHighlightWord(i);
         sayText(word);
-      }, i * 700);
+      }, i * 750);
     });
-    setTimeout(() => setHighlightWord(-1), current.words.length * 700 + 500);
+    setTimeout(() => setHighlightWord(-1), current.words.length * 750 + 600);
   };
+
+  useEffect(() => {
+    setHighlightWord(-1);
+    setIndex(0);
+  }, [level]);
 
   useEffect(() => {
     setHighlightWord(-1);
     const t = setTimeout(readSentence, 400);
     return () => clearTimeout(t);
   }, [current]);
+
+  const levelLabels = { 1: '⭐ Easy', 2: '⭐⭐ Medium', 3: '⭐⭐⭐ Harder' };
 
   return (
     <ActivityShell
@@ -130,6 +137,13 @@ export function SentenceReaderActivity({ config }: ReadingProps) {
       voiceEnabled={isEnabled} onToggleVoice={toggle}
     >
       <div className={styles.container}>
+        <div className={styles.levelBar}>
+          {([1,2,3] as const).map(l => (
+            <button key={l} className={`${styles.levelBtn} ${level === l ? styles.levelActive : ''}`} onClick={() => setLevel(l)}>
+              {levelLabels[l]}
+            </button>
+          ))}
+        </div>
         <div className={styles.sentenceCard}>
           <div className={styles.sentenceEmoji}>{current.emoji}</div>
           <div className={styles.sentenceWords}>

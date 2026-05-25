@@ -22,6 +22,7 @@ import { AdditionActivity, CompareActivity, PatternActivity } from '../activitie
 import { TellTimeActivity } from '../activities/TellTimeActivity';
 import { PhonicsActivity } from '../activities/PhonicsActivity';
 import { CVCWordActivity, SentenceReaderActivity, StoryTimeActivity } from '../activities/ReadingActivity';
+import { EmotionsActivity, WeatherActivity, FamilyActivity, RoutinesActivity, NatureColorsActivity, SensesActivity, DirectionsActivity, SizesActivity, HealthyEatingActivity } from '../activities/TopicActivity';
 import type { ActivityConfig, ComponentType } from '../../data/activities';
 import { useProgress } from '../../context/ProgressContext';
 import styles from './ActivityLoader.module.css';
@@ -57,6 +58,15 @@ const activityComponentMap: ComponentMap = {
   'cvc-words': CVCWordActivity,
   'sentence-reader': SentenceReaderActivity,
   'story-time': StoryTimeActivity,
+  'emotions': EmotionsActivity,
+  'weather': WeatherActivity,
+  'family': FamilyActivity,
+  'routines': RoutinesActivity,
+  'nature-colors': NatureColorsActivity,
+  'senses': SensesActivity,
+  'directions': DirectionsActivity,
+  'sizes': SizesActivity,
+  'healthy-eating': HealthyEatingActivity,
 };
 
 export function ActivityLoader() {
