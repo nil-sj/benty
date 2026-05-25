@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ActivityShell } from '../layout/ActivityShell';
 import type { ActivityConfig } from '../../data/activities';
 import { songsData } from '../../data/learningData';
+import { playSong, stopSong, isAudioSupported } from '../../utils/audioSynth';
 import { useSpeech } from '../../hooks/useSpeech';
 import styles from './MusicAlbumActivity.module.css';
 
@@ -11,62 +12,31 @@ interface MusicAlbumProps {
 
 export function MusicAlbumActivity({ config }: MusicAlbumProps) {
   const [playingId, setPlayingId] = useState<string | null>(null);
-  const [displayedLyrics, setDisplayedLyrics] = useState('');
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const { isEnabled, toggle, stop } = useSpeech(config.voiceEnabled);
+  const [audioSupported] = useState(isAudioSupported);
+  const { isEnabled, toggle, sayText } = useSpeech(config.voiceEnabled);
 
-  const clearTimer = () => { if (timerRef.current) clearTimeout(timerRef.current); };
-
-  useEffect(() => () => { clearTimer(); stop(); }, []);
+  useEffect(() => () => stopSong(), []);
 
   const handleSongClick = (songId: string) => {
     const song = songsData.find(s => s.id === songId);
     if (!song) return;
 
     if (playingId === songId) {
-      stop();
+      stopSong();
       setPlayingId(null);
-      setDisplayedLyrics('');
-      clearTimer();
       return;
     }
 
-    stop();
-    clearTimer();
+    stopSong();
     setPlayingId(songId);
-    setDisplayedLyrics(song.fullLyrics);
 
-    if (isEnabled && 'speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance(song.fullLyrics);
-      utterance.rate = 0.78;
-      utterance.pitch = 1.2;
-      utterance.volume = 1;
-
-      // Try to get a clear voice
-      const voices = window.speechSynthesis.getVoices();
-      const preferred = voices.find(v =>
-        v.lang.startsWith('en') && (
-          v.name.includes('Samantha') || v.name.includes('Google') ||
-          v.name.includes('Karen') || v.name.includes('Moira')
-        )
-      );
-      if (preferred) utterance.voice = preferred;
-
-      utterance.onend = () => {
-        timerRef.current = setTimeout(() => {
-          setPlayingId(null);
-          setDisplayedLyrics('');
-        }, 800);
-      };
-
-      window.speechSynthesis.speak(utterance);
+    if (audioSupported) {
+      playSong(songId, () => setPlayingId(null));
     } else {
-      // Fallback: just show lyrics for reading, auto-dismiss
-      const duration = song.fullLyrics.length * 80;
-      timerRef.current = setTimeout(() => {
-        setPlayingId(null);
-        setDisplayedLyrics('');
-      }, duration);
+      // Fallback to speech
+      if (isEnabled) sayText(song.fullLyrics);
+      const dur = song.fullLyrics.length * 75;
+      setTimeout(() => setPlayingId(null), dur);
     }
   };
 
@@ -79,15 +49,19 @@ export function MusicAlbumActivity({ config }: MusicAlbumProps) {
       onToggleVoice={toggle}
     >
       <div className={styles.container}>
-        <p className={styles.subtitle}>Tap a song to sing along! 🎤</p>
+        <p className={styles.subtitle}>
+          {audioSupported ? '🎹 Tap a song to hear the melody!' : '🎤 Tap a song to sing along!'}
+        </p>
 
-        {/* Lyrics panel */}
-        {playingId && displayedLyrics && (
+        {/* Lyrics panel for playing song */}
+        {playingId && (
           <div className={styles.lyricsPanel} aria-live="polite">
             <div className={styles.lyricsBars} aria-hidden="true">
               <span /><span /><span /><span /><span />
             </div>
-            <p className={styles.lyricsText}>{displayedLyrics}</p>
+            <p className={styles.lyricsText}>
+              {songsData.find(s => s.id === playingId)?.fullLyrics}
+            </p>
           </div>
         )}
 

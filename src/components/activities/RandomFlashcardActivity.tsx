@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ActivityShell } from '../layout/ActivityShell';
 import { useSpeech } from '../../hooks/useSpeech';
 import { useRandomItem } from '../../hooks/useRandomItem';
@@ -9,6 +9,7 @@ import {
 } from '../../data/learningData';
 import type { LearningItem } from '../../data/learningData';
 import styles from './FlashcardActivity.module.css';
+import orderStyles from './OrderToggle.module.css';
 
 interface RandomFlashcardProps {
   config: ActivityConfig;
@@ -42,74 +43,123 @@ const CATEGORY_COLORS: Record<string, string> = {
 };
 
 export function RandomFlashcardActivity({ config }: RandomFlashcardProps) {
-  const items = getDataForSource(config.dataSource);
-  const { current, next, previous, canGoPrevious } = useRandomItem(items);
+  const sourceItems = getDataForSource(config.dataSource);
+  const [isRandom, setIsRandom] = useState(false);
+  const [orderedIndex, setOrderedIndex] = useState(0);
   const { sayText, repeat, isEnabled, toggle } = useSpeech(config.voiceEnabled);
-  
+
+  // Random mode hook
+  const randomHook = useRandomItem(sourceItems);
+
+  const currentItem = isRandom
+    ? randomHook.current
+    : sourceItems[orderedIndex];
+
+  const totalItems = sourceItems.length;
+  const currentIndex = isRandom ? null : orderedIndex + 1;
+
 
   const speakItem = useCallback((item: LearningItem) => {
     const mainText = item.audioText || `This is a ${item.name}.`;
     const funFact = item.funFact || '';
     if (funFact) {
-      // Read name first, then fun fact after a 1.5s pause
       sayText(mainText);
       setTimeout(() => sayText(funFact), 2200);
     } else {
       sayText(mainText);
     }
-    
   }, [sayText]);
 
   useEffect(() => {
-    const timer = setTimeout(() => speakItem(current), 350);
+    const timer = setTimeout(() => speakItem(currentItem), 350);
     return () => clearTimeout(timer);
-  }, [current]);
+  }, [currentItem]);
 
-  const accentColor = CATEGORY_COLORS[current.category || ''] || 'var(--color-coral)';
+  const handleNext = () => {
+    if (isRandom) {
+      randomHook.next();
+    } else {
+      setOrderedIndex(i => Math.min(i + 1, totalItems - 1));
+    }
+  };
+
+  const handlePrevious = () => {
+    if (isRandom) {
+      randomHook.previous();
+    } else {
+      setOrderedIndex(i => Math.max(i - 1, 0));
+    }
+  };
+
+  const canGoNext = isRandom ? true : orderedIndex < totalItems - 1;
+  const canGoPrev = isRandom ? randomHook.canGoPrevious : orderedIndex > 0;
+
+  const accentColor = CATEGORY_COLORS[currentItem.category || ''] || 'var(--color-coral)';
 
   return (
     <ActivityShell
       title={config.title}
       icon={config.icon}
-      onNext={next}
-      onPrevious={previous}
+      onNext={canGoNext ? handleNext : undefined}
+      onPrevious={handlePrevious}
       onRepeat={repeat}
-      canGoPrevious={canGoPrevious}
-      canGoNext={true}
-      nextLabel="Next →"
+      canGoPrevious={canGoPrev}
+      canGoNext={canGoNext}
+      nextLabel={!isRandom && orderedIndex === totalItems - 1 ? '✓ Done' : 'Next →'}
+      progressCurrent={!isRandom ? currentIndex! : undefined}
+      progressTotal={!isRandom ? totalItems : undefined}
       voiceEnabled={isEnabled}
       onToggleVoice={toggle}
     >
       <div className={styles.cardWrapper}>
+        {/* Order/Random toggle */}
+        <div className={orderStyles.toggleBar}>
+          <span className={orderStyles.toggleLabel}>Mode:</span>
+          <button
+            className={`${orderStyles.modeBtn} ${!isRandom ? orderStyles.active : ''}`}
+            onClick={() => setIsRandom(false)}
+            aria-pressed={!isRandom}
+          >
+            📋 In Order
+          </button>
+          <button
+            className={`${orderStyles.modeBtn} ${isRandom ? orderStyles.active : ''}`}
+            onClick={() => { setIsRandom(true); }}
+            aria-pressed={isRandom}
+          >
+            🔀 Random
+          </button>
+          {!isRandom && (
+            <span className={orderStyles.counter} aria-label={`Item ${currentIndex} of ${totalItems}`}>
+              {currentIndex} / {totalItems}
+            </span>
+          )}
+        </div>
+
         <div className={styles.card}>
           <div className={styles.cardInner}>
             <div className={styles.visualSide}>
-              <div className={styles.emojiDisplay} aria-label={current.name}>
-                {current.emoji}
+              <div className={styles.emojiDisplay} aria-label={currentItem.name}>
+                {currentItem.emoji}
               </div>
             </div>
             <div className={styles.textSide}>
               <div className={styles.primaryText} style={{ color: accentColor }}>
-                {current.name}
+                {currentItem.name}
               </div>
-              {current.category && (
+              {currentItem.category && (
                 <div style={{
-                  background: accentColor,
-                  color: 'white',
-                  borderRadius: 'var(--radius-lg)',
-                  padding: '4px 14px',
-                  fontWeight: 800,
-                  fontSize: '0.9rem',
-                  display: 'inline-block',
-                  alignSelf: 'flex-start',
+                  background: accentColor, color: 'white',
+                  borderRadius: 'var(--radius-lg)', padding: '4px 14px',
+                  fontWeight: 800, fontSize: '0.9rem', display: 'inline-block', alignSelf: 'flex-start',
                 }}>
-                  {current.category}
+                  {currentItem.category}
                 </div>
               )}
-              {current.funFact && (
+              {currentItem.funFact && (
                 <div className={styles.funFact}>
                   <span className={styles.funFactIcon}>💡</span>
-                  <span>{current.funFact}</span>
+                  <span>{currentItem.funFact}</span>
                 </div>
               )}
               <button className={styles.speakBtn} onClick={repeat} aria-label="Say it again">

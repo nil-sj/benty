@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getActivityById } from '../../data/activities';
 import { SequentialFlashcardActivity } from '../activities/SequentialFlashcardActivity';
@@ -16,9 +17,13 @@ import { AnimalSoundsActivity } from '../activities/AnimalSoundsActivity';
 import { MemoryCardGame } from '../activities/MemoryCardGame';
 import { RhymeFinderActivity } from '../activities/RhymeFinderActivity';
 import { FirstLetterActivity } from '../activities/FirstLetterActivity';
+import { OppositesActivity } from '../activities/OppositesActivity';
+import { AdditionActivity, CompareActivity, PatternActivity } from '../activities/MathActivity';
+import { TellTimeActivity } from '../activities/TellTimeActivity';
+import { PhonicsActivity } from '../activities/PhonicsActivity';
+import { CVCWordActivity, SentenceReaderActivity, StoryTimeActivity } from '../activities/ReadingActivity';
 import type { ActivityConfig, ComponentType } from '../../data/activities';
 import { useProgress } from '../../context/ProgressContext';
-import { useEffect } from 'react';
 import styles from './ActivityLoader.module.css';
 
 type ComponentMap = {
@@ -42,6 +47,16 @@ const activityComponentMap: ComponentMap = {
   'memory-card': MemoryCardGame,
   'rhyme-finder': RhymeFinderActivity,
   'first-letter': FirstLetterActivity,
+  'opposites': OppositesActivity,
+  'addition': AdditionActivity,
+  'subtraction': AdditionActivity, // reuses same component, config.dataSource differentiates
+  'compare': CompareActivity,
+  'pattern': PatternActivity,
+  'tell-time': TellTimeActivity,
+  'phonics': PhonicsActivity,
+  'cvc-words': CVCWordActivity,
+  'sentence-reader': SentenceReaderActivity,
+  'story-time': StoryTimeActivity,
 };
 
 export function ActivityLoader() {
@@ -50,16 +65,13 @@ export function ActivityLoader() {
   const { recordActivity } = useProgress();
 
   if (!activityId) return <NotFound />;
-
   const config = getActivityById(activityId);
   if (!config) return <NotFound />;
 
-  // Record that this activity was visited (safe: ActivityLoader always renders with valid config)
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => { recordActivity(config.id); }, [config.id]);
 
   const ActivityComponent = activityComponentMap[config.componentType];
-
   if (!ActivityComponent) {
     return (
       <div className={styles.comingSoon}>
@@ -70,7 +82,6 @@ export function ActivityLoader() {
       </div>
     );
   }
-
   return <ActivityComponent config={config} />;
 }
 
@@ -79,8 +90,8 @@ function NotFound() {
   return (
     <div className={styles.comingSoon}>
       <span className={styles.comingSoonIcon}>🤔</span>
-      <h2>Hmm, we can't find that activity!</h2>
-      <p>Let's go back home and try another one.</p>
+      <h2>Hmm, we can not find that activity!</h2>
+      <p>Let us go back home and try another one.</p>
       <button onClick={() => navigate('/')} className={styles.homeBtn}>🏠 Back to Home</button>
     </div>
   );

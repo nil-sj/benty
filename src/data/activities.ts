@@ -15,7 +15,17 @@ export type ComponentType =
   | 'animal-sounds'
   | 'memory-card'
   | 'rhyme-finder'
-  | 'first-letter';
+  | 'first-letter'
+  | 'opposites'
+  | 'addition'
+  | 'subtraction'
+  | 'compare'
+  | 'pattern'
+  | 'tell-time'
+  | 'phonics'
+  | 'cvc-words'
+  | 'sentence-reader'
+  | 'story-time';
 
 export type NavigationMode = 'sequential' | 'random';
 export type LayoutMode = 'single-column' | 'two-column' | 'grid' | 'canvas' | 'quiz' | 'matching' | 'music-album';
@@ -442,6 +452,140 @@ export const activities: ActivityConfig[] = [
     voiceEnabled: true,
   },
 
+  // Opposites
+  {
+    id: 'opposites',
+    title: 'Opposites',
+    category: 'Learn Basics',
+    icon: '↔️',
+    description: 'Big and small, hot and cold — learn opposites!',
+    route: '/activity/opposites',
+    componentType: 'opposites' as const,
+    dataSource: 'opposites',
+    navigationMode: 'sequential' as const,
+    layout: 'single-column' as const,
+    voiceEnabled: true,
+  },
+  // Mathematics
+  {
+    id: 'addition',
+    title: 'Addition',
+    category: 'Mathematics',
+    icon: '➕',
+    description: 'Add numbers up to 10!',
+    route: '/activity/addition',
+    componentType: 'addition' as const,
+    dataSource: 'addition',
+    navigationMode: 'random' as const,
+    layout: 'quiz' as const,
+    voiceEnabled: true,
+  },
+  {
+    id: 'subtraction',
+    title: 'Subtraction',
+    category: 'Mathematics',
+    icon: '➖',
+    description: 'Take away numbers and see what is left!',
+    route: '/activity/subtraction',
+    componentType: 'subtraction' as const,
+    dataSource: 'subtraction',
+    navigationMode: 'random' as const,
+    layout: 'quiz' as const,
+    voiceEnabled: true,
+  },
+  {
+    id: 'more-or-fewer',
+    title: 'More or Fewer?',
+    category: 'Mathematics',
+    icon: '⚖️',
+    description: 'Which group has more? Which has fewer?',
+    route: '/activity/more-or-fewer',
+    componentType: 'compare' as const,
+    dataSource: 'compare',
+    navigationMode: 'random' as const,
+    layout: 'quiz' as const,
+    voiceEnabled: true,
+  },
+  {
+    id: 'patterns',
+    title: 'What Comes Next?',
+    category: 'Mathematics',
+    icon: '🔮',
+    description: 'Spot the pattern and find what comes next!',
+    route: '/activity/patterns',
+    componentType: 'pattern' as const,
+    dataSource: 'patterns',
+    navigationMode: 'random' as const,
+    layout: 'quiz' as const,
+    voiceEnabled: true,
+  },
+  {
+    id: 'tell-time',
+    title: 'Tell the Time',
+    category: 'Mathematics',
+    icon: '🕐',
+    description: 'What time does the clock show?',
+    route: '/activity/tell-time',
+    componentType: 'tell-time' as const,
+    dataSource: 'time',
+    navigationMode: 'random' as const,
+    layout: 'quiz' as const,
+    voiceEnabled: true,
+  },
+  // Early Reading
+  {
+    id: 'phonics',
+    title: 'Letter Sounds',
+    category: 'Early Reading',
+    icon: '🔤',
+    description: 'Every letter makes a sound — learn them all!',
+    route: '/activity/phonics',
+    componentType: 'phonics' as const,
+    dataSource: 'phonics',
+    navigationMode: 'sequential' as const,
+    layout: 'single-column' as const,
+    voiceEnabled: true,
+  },
+  {
+    id: 'blend-words',
+    title: 'Blend Words',
+    category: 'Early Reading',
+    icon: '🔗',
+    description: 'Put letters together to build words — cat, dog, sun!',
+    route: '/activity/blend-words',
+    componentType: 'cvc-words' as const,
+    dataSource: 'cvc',
+    navigationMode: 'sequential' as const,
+    layout: 'single-column' as const,
+    voiceEnabled: true,
+  },
+  {
+    id: 'read-sentences',
+    title: 'Read Sentences',
+    category: 'Early Reading',
+    icon: '📖',
+    description: 'Follow along as simple sentences are read aloud!',
+    route: '/activity/read-sentences',
+    componentType: 'sentence-reader' as const,
+    dataSource: 'sentences',
+    navigationMode: 'sequential' as const,
+    layout: 'single-column' as const,
+    voiceEnabled: true,
+  },
+  {
+    id: 'story-time',
+    title: 'Story Time',
+    category: 'Early Reading',
+    icon: '📚',
+    description: 'Short illustrated stories to read and enjoy!',
+    route: '/activity/story-time',
+    componentType: 'story-time' as const,
+    dataSource: 'stories',
+    navigationMode: 'sequential' as const,
+    layout: 'single-column' as const,
+    voiceEnabled: true,
+  },
+
 ];
 
 export const categories = [
@@ -451,6 +595,8 @@ export const categories = [
   { name: 'Music & Rhymes', icon: '🎶', color: 'var(--cat-music)' },
   { name: 'Drawing & Creativity', icon: '🎨', color: 'var(--cat-drawing)' },
   { name: 'Words & Reading', icon: '📖', color: 'var(--cat-words)' },
+  { name: 'Mathematics', icon: '🔢', color: '#22C55E' },
+  { name: 'Early Reading', icon: '📗', color: '#F59E0B' },
 ];
 
 export function getActivityById(id: string): ActivityConfig | undefined {
