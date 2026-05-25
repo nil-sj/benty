@@ -1053,3 +1053,528 @@ export const healthyEatingData: FoodGroupItem[] = [
     funFact: 'Sweets and fizzy drinks contain a lot of sugar. Too much sugar can cause tooth decay — that is why dentists remind you to brush your teeth twice every day!',
   },
 ];
+
+// ─── Number Bonds ─────────────────────────────────────────────────────────────
+export interface NumberBond {
+  id: string;
+  total: number;
+  part1: number;
+  part2: number;
+  emoji: string;
+  audioText: string;
+}
+export const numberBondsData: NumberBond[] = [
+  ...[...Array(9)].flatMap((_, i) => {
+    const total = i + 2;
+    return [...Array(total - 1)].map((_, j) => {
+      const p1 = j + 1;
+      const emojis = ['⭐','🍎','🎈','🌸','🐟','❤️','🦋','☀️','🍪'];
+      return { id: `bond-${total}-${p1}`, total, part1: p1, part2: total - p1, emoji: emojis[i % emojis.length], audioText: `${p1} and ${total - p1} make ${total}!` };
+    });
+  }),
+];
+
+// ─── Ordinal Numbers ─────────────────────────────────────────────────────────
+export interface OrdinalItem {
+  id: string;
+  number: number;
+  ordinal: string;
+  short: string;
+  emoji: string;
+  audioText: string;
+  example: string;
+  funFact: string;
+}
+export const ordinalData: OrdinalItem[] = [
+  { id: 'ord1', number: 1, ordinal: 'First', short: '1st', emoji: '🥇', audioText: 'First — 1st!', example: 'The gold medal winner comes first.', funFact: 'First means number one in a sequence — you come first in a race when you reach the finish line before everyone else!' },
+  { id: 'ord2', number: 2, ordinal: 'Second', short: '2nd', emoji: '🥈', audioText: 'Second — 2nd!', example: 'The silver medal winner comes second.', funFact: 'Second means you are right after first. Coming second is still brilliant — you beat everyone except the winner!' },
+  { id: 'ord3', number: 3, ordinal: 'Third', short: '3rd', emoji: '🥉', audioText: 'Third — 3rd!', example: 'The bronze medal winner comes third.', funFact: 'Third place gets a bronze medal. Bronze, silver, and gold — can you say them in order?' },
+  { id: 'ord4', number: 4, ordinal: 'Fourth', short: '4th', emoji: '4️⃣', audioText: 'Fourth — 4th!', example: 'April is the fourth month of the year.', funFact: 'Fourth means position number four. A square has four corners and four sides!' },
+  { id: 'ord5', number: 5, ordinal: 'Fifth', short: '5th', emoji: '5️⃣', audioText: 'Fifth — 5th!', example: 'Friday is the fifth day of the school week.', funFact: 'Fifth is the ordinal for five. Your five fingers on one hand go first, second, third, fourth, fifth!' },
+  { id: 'ord6', number: 6, ordinal: 'Sixth', short: '6th', emoji: '6️⃣', audioText: 'Sixth — 6th!', example: 'June is the sixth month of the year.', funFact: 'Sixth means position six. An insect has six legs — which leg do you think is sixth?' },
+  { id: 'ord7', number: 7, ordinal: 'Seventh', short: '7th', emoji: '7️⃣', audioText: 'Seventh — 7th!', example: 'Sunday is the seventh day of the week.', funFact: 'Seventh means position seven. A rainbow has seven colours and the seventh one at the bottom is violet!' },
+  { id: 'ord8', number: 8, ordinal: 'Eighth', short: '8th', emoji: '8️⃣', audioText: 'Eighth — 8th!', example: 'August is the eighth month of the year.', funFact: 'Eighth means position eight. A spider has eight legs — can you count which one is eighth?' },
+  { id: 'ord9', number: 9, ordinal: 'Ninth', short: '9th', emoji: '9️⃣', audioText: 'Ninth — 9th!', example: 'September is the ninth month of the year.', funFact: 'Ninth means position nine. Nine plus one makes ten!' },
+  { id: 'ord10', number: 10, ordinal: 'Tenth', short: '10th', emoji: '🔟', audioText: 'Tenth — 10th!', example: 'October is the tenth month of the year.', funFact: 'Tenth is the last single-digit ordinal. You reach tenth when you count to ten on all your fingers — well done!' },
+];
+
+// ─── Skip Counting ───────────────────────────────────────────────────────────
+export interface SkipCountItem {
+  id: string;
+  skip: number;
+  sequence: number[];
+  emoji: string;
+  label: string;
+  audioText: string;
+  hint: string;
+}
+export const skipCountData: SkipCountItem[] = [
+  { id: 'skip2', skip: 2, sequence: [2,4,6,8,10,12,14,16,18,20], emoji: '👟', label: 'Count in 2s', audioText: 'Count in twos — 2, 4, 6, 8, 10!', hint: 'Add 2 each time' },
+  { id: 'skip5', skip: 5, sequence: [5,10,15,20,25,30,35,40,45,50], emoji: '🖐️', label: 'Count in 5s', audioText: 'Count in fives — 5, 10, 15, 20, 25!', hint: 'Count by hands — each hand has 5 fingers!' },
+  { id: 'skip10', skip: 10, sequence: [10,20,30,40,50,60,70,80,90,100], emoji: '🔟', label: 'Count in 10s', audioText: 'Count in tens — 10, 20, 30, 40, 50!', hint: 'Add 10 each time — you reach 100 in just 10 steps!' },
+];
+
+// ─── Place Value (Tens & Ones) ────────────────────────────────────────────────
+export interface PlaceValueItem {
+  id: string;
+  number: number;
+  tens: number;
+  ones: number;
+  audioText: string;
+}
+export const placeValueData: PlaceValueItem[] = [
+  ...[11,12,13,14,15,16,17,18,19,20,21,23,25,30,32,34,40,41,45,50,52,60,63,70,74,80,85,90,99].map(n => ({
+    id: `pv${n}`, number: n, tens: Math.floor(n/10), ones: n%10, audioText: `${n} has ${Math.floor(n/10)} ten${Math.floor(n/10)===1?'':'s'} and ${n%10} one${n%10===1?'':'s'}.`,
+  })),
+];
+
+// ─── Syllable Counting ────────────────────────────────────────────────────────
+export interface SyllableItem {
+  id: string;
+  word: string;
+  emoji: string;
+  syllables: number;
+  breakdown: string;
+  audioText: string;
+}
+export const syllableData: SyllableItem[] = [
+  { id: 'sy-cat', word: 'cat', emoji: '🐱', syllables: 1, breakdown: 'cat', audioText: 'cat — one clap!' },
+  { id: 'sy-dog', word: 'dog', emoji: '🐶', syllables: 1, breakdown: 'dog', audioText: 'dog — one clap!' },
+  { id: 'sy-sun', word: 'sun', emoji: '☀️', syllables: 1, breakdown: 'sun', audioText: 'sun — one clap!' },
+  { id: 'sy-apple', word: 'apple', emoji: '🍎', syllables: 2, breakdown: 'ap-ple', audioText: 'ap-ple — two claps!' },
+  { id: 'sy-baby', word: 'baby', emoji: '👶', syllables: 2, breakdown: 'ba-by', audioText: 'ba-by — two claps!' },
+  { id: 'sy-happy', word: 'happy', emoji: '😄', syllables: 2, breakdown: 'hap-py', audioText: 'hap-py — two claps!' },
+  { id: 'sy-robot', word: 'robot', emoji: '🤖', syllables: 2, breakdown: 'ro-bot', audioText: 'ro-bot — two claps!' },
+  { id: 'sy-water', word: 'water', emoji: '💧', syllables: 2, breakdown: 'wa-ter', audioText: 'wa-ter — two claps!' },
+  { id: 'sy-tiger', word: 'tiger', emoji: '🐯', syllables: 2, breakdown: 'ti-ger', audioText: 'ti-ger — two claps!' },
+  { id: 'sy-banana', word: 'banana', emoji: '🍌', syllables: 3, breakdown: 'ba-na-na', audioText: 'ba-na-na — three claps!' },
+  { id: 'sy-elephant', word: 'elephant', emoji: '🐘', syllables: 3, breakdown: 'el-e-phant', audioText: 'el-e-phant — three claps!' },
+  { id: 'sy-umbrella', word: 'umbrella', emoji: '☂️', syllables: 3, breakdown: 'um-brel-la', audioText: 'um-brel-la — three claps!' },
+  { id: 'sy-butterfly', word: 'butterfly', emoji: '🦋', syllables: 3, breakdown: 'but-ter-fly', audioText: 'but-ter-fly — three claps!' },
+  { id: 'sy-computer', word: 'computer', emoji: '💻', syllables: 3, breakdown: 'com-pu-ter', audioText: 'com-pu-ter — three claps!' },
+  { id: 'sy-caterpillar', word: 'caterpillar', emoji: '🐛', syllables: 4, breakdown: 'cat-er-pil-lar', audioText: 'cat-er-pil-lar — four claps!' },
+  { id: 'sy-hippopotamus', word: 'hippopotamus', emoji: '🦛', syllables: 5, breakdown: 'hip-po-pot-a-mus', audioText: 'hip-po-pot-a-mus — five claps!' },
+];
+
+// ─── Digraphs (ch, sh, th, wh, ph) ───────────────────────────────────────────
+export interface DigraphItem {
+  id: string;
+  digraph: string;
+  sound: string;
+  emoji: string;
+  words: string[];
+  wordEmojis: string[];
+  audioText: string;
+  description: string;
+}
+export const digraphsData: DigraphItem[] = [
+  { id: 'dg-ch', digraph: 'CH', sound: 'ch', emoji: '🍫', words: ['chip', 'chop', 'chat', 'chin', 'chest'], wordEmojis: ['🍟','🪓','💬','🧏','📦'], audioText: 'C and H together say ch! Like in chip, chop, and chat.', description: 'When C and H join together they make a new sound — like a little sneeze or a train!' },
+  { id: 'dg-sh', digraph: 'SH', sound: 'sh', emoji: '🤫', words: ['ship', 'shop', 'shed', 'shin', 'shell'], wordEmojis: ['🚢','🏪','🏚️','🦵','🐚'], audioText: 'S and H together say sh! Like in ship, shop, and shell.', description: 'When S and H join together they make a hushing sound — like telling someone to be quiet!' },
+  { id: 'dg-th', digraph: 'TH', sound: 'th', emoji: '🤔', words: ['that', 'this', 'them', 'then', 'thick'], wordEmojis: ['👈','☝️','👥','⏰','🧱'], audioText: 'T and H together say th! Like in that, this, and them.', description: 'When T and H join together your tongue goes between your teeth to make the sound!' },
+  { id: 'dg-wh', digraph: 'WH', sound: 'wh', emoji: '💨', words: ['when', 'what', 'whip', 'where', 'while'], wordEmojis: ['⏰','❓','🎯','📍','⌛'], audioText: 'W and H together say wh! Like in when, what, and where.', description: 'When W and H join together they make a whooshing sound like a breath of wind!' },
+  { id: 'dg-ph', digraph: 'PH', sound: 'f', emoji: '📞', words: ['phone', 'photo', 'phrase', 'phew', 'Phil'], wordEmojis: ['📱','📸','💬','😅','😊'], audioText: 'P and H together say f! Like in phone and photo.', description: 'When P and H join together they make an F sound! Phone sounds just like fone.' },
+];
+
+// ─── Long Vowels ─────────────────────────────────────────────────────────────
+export interface LongVowelItem {
+  id: string;
+  vowel: string;
+  rule: string;
+  emoji: string;
+  words: string[];
+  wordEmojis: string[];
+  audioText: string;
+  example: string;
+}
+export const longVowelsData: LongVowelItem[] = [
+  { id: 'lv-a', vowel: 'A', rule: 'a_e (magic e)', emoji: '🎂', words: ['cake', 'make', 'lake', 'name', 'gate'], wordEmojis: ['🎂','🛠️','🌊','🏷️','🚪'], audioText: 'Long A says its own name — like in cake, make, and lake!', example: 'The E at the end is magic — it makes the A say its name!' },
+  { id: 'lv-e', vowel: 'E', rule: 'ee / ea', emoji: '🐝', words: ['tree', 'see', 'bee', 'read', 'eat'], wordEmojis: ['🌲','👀','🐝','📖','🍽️'], audioText: 'Long E says its own name — like in tree, bee, and read!', example: 'Two E letters together or E and A together make the long E sound!' },
+  { id: 'lv-i', vowel: 'I', rule: 'i_e (magic e)', emoji: '🦁', words: ['bike', 'kite', 'time', 'hide', 'pine'], wordEmojis: ['🚲','🪁','⏰','🙈','🌲'], audioText: 'Long I says its own name — like in bike, kite, and time!', example: 'Magic E at the end makes the I say its name!' },
+  { id: 'lv-o', vowel: 'O', rule: 'o_e (magic e)', emoji: '🏠', words: ['home', 'note', 'hope', 'bone', 'rope'], wordEmojis: ['🏠','📝','🌟','🦴','🪢'], audioText: 'Long O says its own name — like in home, note, and hope!', example: 'Magic E at the end makes the O say its name!' },
+  { id: 'lv-u', vowel: 'U', rule: 'u_e (magic e)', emoji: '🦄', words: ['cube', 'tune', 'cute', 'mule', 'dune'], wordEmojis: ['🧊','🎵','😊','🐴','🏜️'], audioText: 'Long U says its own name — like in cube, tune, and cute!', example: 'Magic E at the end makes the U say its name — and it sounds like you!' },
+];
+
+// ─── Simple Grammar ───────────────────────────────────────────────────────────
+export interface GrammarItem {
+  id: string;
+  concept: string;
+  emoji: string;
+  definition: string;
+  examples: string[];
+  exampleEmojis: string[];
+  audioText: string;
+  funFact: string;
+  tip: string;
+}
+export const grammarData: GrammarItem[] = [
+  { id: 'gr-noun', concept: 'Nouns', emoji: '🏷️', definition: 'A noun is the name of a person, place, animal, or thing.', examples: ['cat', 'school', 'apple', 'Mum', 'London'], exampleEmojis: ['🐱','🏫','🍎','👩','🌆'], audioText: 'A noun is the name of something!', funFact: 'Almost everything around you has a noun — the chair you sit on, the sky above you, your best friend\'s name. Nouns are the building blocks of sentences!', tip: 'Ask yourself: Is it a person, place, animal, or thing? If yes — it\'s a noun!' },
+  { id: 'gr-verb', concept: 'Verbs', emoji: '🏃', definition: 'A verb is a doing or being word — it tells us what someone or something does.', examples: ['run', 'jump', 'eat', 'is', 'sleep'], exampleEmojis: ['🏃','🦘','🍽️','😊','😴'], audioText: 'A verb is a doing word!', funFact: 'Every sentence needs a verb. Without a verb, you cannot make a proper sentence! Verbs can also describe states, like "is" or "feels".', tip: 'Ask yourself: What is the person or animal DOING? That word is the verb!' },
+  { id: 'gr-adjective', concept: 'Adjectives', emoji: '🎨', definition: 'An adjective describes a noun — it tells us what something is like.', examples: ['big', 'red', 'fluffy', 'happy', 'cold'], exampleEmojis: ['🐘','🔴','🐰','😄','🧊'], audioText: 'An adjective describes something!', funFact: 'Adjectives make your writing much more interesting! Compare "the cat sat" with "the fluffy orange cat sat" — adjectives paint a picture in your mind!', tip: 'Ask yourself: What is it LIKE? Big? Small? Red? Round? Those describing words are adjectives!' },
+  { id: 'gr-question', concept: 'Questions', emoji: '❓', definition: 'A question asks for information and ends with a question mark.', examples: ['What is that?', 'Where are we?', 'Can I help?', 'Why is it blue?', 'How old are you?'], exampleEmojis: ['🤔','📍','🙋','💙','🎂'], audioText: 'A question asks for information!', funFact: 'Question words in English are called the 5 Ws and H: Who, What, Where, When, Why, and How. These six words can ask almost anything!', tip: 'A question always ends with a ? mark. If you are asking, you are making a question!' },
+  { id: 'gr-sentence', concept: 'Sentences', emoji: '📝', definition: 'A sentence is a group of words that makes complete sense. It starts with a capital letter and ends with a full stop.', examples: ['The cat sat.', 'I love apples!', 'Where is my bag?', 'She runs fast.', 'Dogs bark.'], exampleEmojis: ['🐱','🍎','🎒','🏃','🐶'], audioText: 'A sentence is a complete thought!', funFact: 'The shortest sentence in English is just two words: "I am." The longest sentence ever written in a novel is over 13,000 words long!', tip: 'Check: Does it start with a CAPITAL? Does it end with a . ! or ? ? Does it make sense? Then it is a sentence!' },
+  { id: 'gr-punctuation', concept: 'Punctuation', emoji: '✏️', definition: 'Punctuation marks are symbols that help us understand when to stop, ask, or feel excited.', examples: ['Full stop .', 'Exclamation mark !', 'Question mark ?', 'Comma ,', 'Apostrophe \''], exampleEmojis: ['⏹️','❗','❓','⏸️','✂️'], audioText: 'Punctuation helps us read sentences!', funFact: 'Before punctuation was invented in the 1400s, all writing was one long string of words with no spaces or stops. Imagine reading that!', tip: 'A full stop means STOP. An exclamation mark means EXCITEMENT! A question mark means you are ASKING.' },
+];
+
+// ─── Drag & Drop: Category Sorting data ───────────────────────────────────────
+export interface SortItem {
+  id: string;
+  name: string;
+  emoji: string;
+  category: string;
+}
+export interface SortChallenge {
+  id: string;
+  title: string;
+  instruction: string;
+  categories: string[];
+  categoryEmojis: string[];
+  items: SortItem[];
+  audioText: string;
+}
+export const sortingChallenges: SortChallenge[] = [
+  {
+    id: 'sort-food-transport',
+    title: 'Food or Transport?',
+    instruction: 'Drag each item into the right basket!',
+    categories: ['Food', 'Transport'],
+    categoryEmojis: ['🍽️', '🚗'],
+    audioText: 'Sort the items — is it food or transport?',
+    items: [
+      { id: 'si1', name: 'Apple', emoji: '🍎', category: 'Food' },
+      { id: 'si2', name: 'Car', emoji: '🚗', category: 'Transport' },
+      { id: 'si3', name: 'Banana', emoji: '🍌', category: 'Food' },
+      { id: 'si4', name: 'Bus', emoji: '🚌', category: 'Transport' },
+      { id: 'si5', name: 'Pizza', emoji: '🍕', category: 'Food' },
+      { id: 'si6', name: 'Train', emoji: '🚂', category: 'Transport' },
+      { id: 'si7', name: 'Carrot', emoji: '🥕', category: 'Food' },
+      { id: 'si8', name: 'Airplane', emoji: '✈️', category: 'Transport' },
+    ],
+  },
+  {
+    id: 'sort-animals-objects',
+    title: 'Animals or Objects?',
+    instruction: 'Sort these into animals and objects!',
+    categories: ['Animal', 'Object'],
+    categoryEmojis: ['🐾', '📦'],
+    audioText: 'Sort the items — is it an animal or an object?',
+    items: [
+      { id: 'si9', name: 'Lion', emoji: '🦁', category: 'Animal' },
+      { id: 'si10', name: 'Chair', emoji: '🪑', category: 'Object' },
+      { id: 'si11', name: 'Elephant', emoji: '🐘', category: 'Animal' },
+      { id: 'si12', name: 'Book', emoji: '📚', category: 'Object' },
+      { id: 'si13', name: 'Frog', emoji: '🐸', category: 'Animal' },
+      { id: 'si14', name: 'Lamp', emoji: '💡', category: 'Object' },
+      { id: 'si15', name: 'Penguin', emoji: '🐧', category: 'Animal' },
+      { id: 'si16', name: 'Clock', emoji: '🕐', category: 'Object' },
+    ],
+  },
+  {
+    id: 'sort-big-small',
+    title: 'Big or Small?',
+    instruction: 'Which things are big and which are small?',
+    categories: ['Big', 'Small'],
+    categoryEmojis: ['🐘', '🐭'],
+    audioText: 'Sort the things — is it big or small?',
+    items: [
+      { id: 'si17', name: 'Elephant', emoji: '🐘', category: 'Big' },
+      { id: 'si18', name: 'Ant', emoji: '🐜', category: 'Small' },
+      { id: 'si19', name: 'Mountain', emoji: '⛰️', category: 'Big' },
+      { id: 'si20', name: 'Bee', emoji: '🐝', category: 'Small' },
+      { id: 'si21', name: 'Ship', emoji: '🚢', category: 'Big' },
+      { id: 'si22', name: 'Coin', emoji: '🪙', category: 'Small' },
+      { id: 'si23', name: 'Whale', emoji: '🐋', category: 'Big' },
+      { id: 'si24', name: 'Button', emoji: '🔘', category: 'Small' },
+    ],
+  },
+  {
+    id: 'sort-living-nonliving',
+    title: 'Living or Not Living?',
+    instruction: 'Sort things that are alive and things that are not!',
+    categories: ['Living', 'Not Living'],
+    categoryEmojis: ['🌱', '🪨'],
+    audioText: 'Is it living or not living?',
+    items: [
+      { id: 'si25', name: 'Dog', emoji: '🐶', category: 'Living' },
+      { id: 'si26', name: 'Rock', emoji: '🪨', category: 'Not Living' },
+      { id: 'si27', name: 'Tree', emoji: '🌳', category: 'Living' },
+      { id: 'si28', name: 'Table', emoji: '🪑', category: 'Not Living' },
+      { id: 'si29', name: 'Fish', emoji: '🐟', category: 'Living' },
+      { id: 'si30', name: 'Cloud', emoji: '☁️', category: 'Not Living' },
+      { id: 'si31', name: 'Flower', emoji: '🌸', category: 'Living' },
+      { id: 'si32', name: 'Shoe', emoji: '👟', category: 'Not Living' },
+    ],
+  },
+  {
+    id: 'sort-hot-cold',
+    title: 'Hot or Cold?',
+    instruction: 'Which things are hot and which are cold?',
+    categories: ['Hot', 'Cold'],
+    categoryEmojis: ['🔥', '❄️'],
+    audioText: 'Is it hot or cold?',
+    items: [
+      { id: 'si33', name: 'Fire', emoji: '🔥', category: 'Hot' },
+      { id: 'si34', name: 'Ice', emoji: '🧊', category: 'Cold' },
+      { id: 'si35', name: 'Sun', emoji: '☀️', category: 'Hot' },
+      { id: 'si36', name: 'Snow', emoji: '❄️', category: 'Cold' },
+      { id: 'si37', name: 'Oven', emoji: '🫙', category: 'Hot' },
+      { id: 'si38', name: 'Penguin', emoji: '🐧', category: 'Cold' },
+      { id: 'si39', name: 'Soup', emoji: '🍲', category: 'Hot' },
+      { id: 'si40', name: 'Ice Cream', emoji: '🍦', category: 'Cold' },
+    ],
+  },
+];
+
+// ─── Sentence Builder (drag words into order) ─────────────────────────────────
+export interface SentenceBuildItem {
+  id: string;
+  words: string[];
+  emoji: string;
+  level: 1 | 2 | 3;
+  audioText: string;
+}
+export const sentenceBuildData: SentenceBuildItem[] = [
+  // Level 1 — 3 words
+  { id: 'sb1', words: ['The', 'cat', 'sat.'], emoji: '🐱', level: 1, audioText: 'The cat sat.' },
+  { id: 'sb2', words: ['I', 'can', 'run.'], emoji: '🏃', level: 1, audioText: 'I can run.' },
+  { id: 'sb3', words: ['A', 'big', 'dog.'], emoji: '🐶', level: 1, audioText: 'A big dog.' },
+  { id: 'sb4', words: ['The', 'sun', 'shines.'], emoji: '☀️', level: 1, audioText: 'The sun shines.' },
+  { id: 'sb5', words: ['A', 'red', 'bus.'], emoji: '🚌', level: 1, audioText: 'A red bus.' },
+  // Level 2 — 4-5 words
+  { id: 'sb6', words: ['The', 'cat', 'sat', 'down.'], emoji: '🐱', level: 2, audioText: 'The cat sat down.' },
+  { id: 'sb7', words: ['I', 'like', 'to', 'run.'], emoji: '🏃', level: 2, audioText: 'I like to run.' },
+  { id: 'sb8', words: ['She', 'has', 'a', 'dog.'], emoji: '🐶', level: 2, audioText: 'She has a dog.' },
+  { id: 'sb9', words: ['The', 'frog', 'can', 'hop.'], emoji: '🐸', level: 2, audioText: 'The frog can hop.' },
+  { id: 'sb10', words: ['We', 'go', 'to', 'school.'], emoji: '🏫', level: 2, audioText: 'We go to school.' },
+  { id: 'sb11', words: ['I', 'see', 'a', 'big', 'fish.'], emoji: '🐟', level: 2, audioText: 'I see a big fish.' },
+  { id: 'sb12', words: ['The', 'bird', 'can', 'fly', 'high.'], emoji: '🐦', level: 2, audioText: 'The bird can fly high.' },
+  // Level 3 — 5-7 words
+  { id: 'sb13', words: ['The', 'dog', 'ran', 'to', 'the', 'park.'], emoji: '🐶', level: 3, audioText: 'The dog ran to the park.' },
+  { id: 'sb14', words: ['I', 'ate', 'a', 'big', 'red', 'apple.'], emoji: '🍎', level: 3, audioText: 'I ate a big red apple.' },
+  { id: 'sb15', words: ['Mum', 'baked', 'a', 'yummy', 'cake', 'today.'], emoji: '🎂', level: 3, audioText: 'Mum baked a yummy cake today.' },
+  { id: 'sb16', words: ['The', 'baby', 'laughed', 'and', 'clapped', 'her', 'hands.'], emoji: '👶', level: 3, audioText: 'The baby laughed and clapped her hands.' },
+];
+
+// ─── Number Line ─────────────────────────────────────────────────────────────
+export interface NumberLineQuestion {
+  id: string;
+  target: number;
+  min: number;
+  max: number;
+  audioText: string;
+  hint: string;
+}
+export const numberLineData: NumberLineQuestion[] = [
+  ...[2,5,7,10,3,8,1,6,9,4,12,15,11,14,16,20,13,17,18,19].map(n => ({
+    id: `nl-${n}`, target: n, min: 0, max: n <= 10 ? 10 : 20,
+    audioText: `Where is ${n} on the number line?`,
+    hint: n <= 10 ? 'Count from 0 to find it!' : 'Count carefully — it goes up to 20!',
+  })),
+];
+
+// ─── One More / One Less ─────────────────────────────────────────────────────
+export interface OnMoreLessQuestion {
+  id: string;
+  number: number;
+  ask: 'more' | 'less';
+  answer: number;
+  emoji: string;
+  audioText: string;
+}
+const OML_EMOJIS = ['🍎','🐟','⭐','🎈','🍪','🌸','🦋','🎾','❤️','🐶'];
+export const oneMoreLessData: OnMoreLessQuestion[] = [
+  ...[1,2,3,4,5,6,7,8,9,10,3,6,8,5,7,4,9,2].flatMap((n, i) => [
+    { id: `oml-more-${n}-${i}`, number: n, ask: 'more' as const, answer: n + 1, emoji: OML_EMOJIS[n % OML_EMOJIS.length], audioText: `What is one more than ${n}?` },
+    { id: `oml-less-${n}-${i}`, number: n, ask: 'less' as const, answer: n - 1, emoji: OML_EMOJIS[(n+2) % OML_EMOJIS.length], audioText: `What is one less than ${n}?` },
+  ]).filter(q => q.answer >= 0 && q.answer <= 11),
+];
+
+// ─── Compound Words ──────────────────────────────────────────────────────────
+export interface CompoundWord {
+  id: string;
+  part1: string;
+  part2: string;
+  compound: string;
+  emoji1: string;
+  emoji2: string;
+  emojiResult: string;
+  audioText: string;
+  sentence: string;
+}
+export const compoundWordsData: CompoundWord[] = [
+  { id: 'cw1', part1: 'rain', part2: 'bow', compound: 'rainbow', emoji1: '🌧️', emoji2: '🏹', emojiResult: '🌈', audioText: 'rain plus bow makes rainbow!', sentence: 'A rainbow appears after the rain.' },
+  { id: 'cw2', part1: 'sun', part2: 'flower', compound: 'sunflower', emoji1: '☀️', emoji2: '🌸', emojiResult: '🌻', audioText: 'sun plus flower makes sunflower!', sentence: 'The tall sunflower turned to face the sun.' },
+  { id: 'cw3', part1: 'butter', part2: 'fly', compound: 'butterfly', emoji1: '🧈', emoji2: '✈️', emojiResult: '🦋', audioText: 'butter plus fly makes butterfly!', sentence: 'A beautiful butterfly landed on the rose.' },
+  { id: 'cw4', part1: 'star', part2: 'fish', compound: 'starfish', emoji1: '⭐', emoji2: '🐟', emojiResult: '⭐', audioText: 'star plus fish makes starfish!', sentence: 'We found a bright orange starfish at the beach.' },
+  { id: 'cw5', part1: 'snow', part2: 'man', compound: 'snowman', emoji1: '❄️', emoji2: '👨', emojiResult: '⛄', audioText: 'snow plus man makes snowman!', sentence: 'We built a snowman with a carrot nose.' },
+  { id: 'cw6', part1: 'foot', part2: 'ball', compound: 'football', emoji1: '🦶', emoji2: '⚽', emojiResult: '⚽', audioText: 'foot plus ball makes football!', sentence: 'We played football in the park all afternoon.' },
+  { id: 'cw7', part1: 'cup', part2: 'cake', compound: 'cupcake', emoji1: '☕', emoji2: '🎂', emojiResult: '🧁', audioText: 'cup plus cake makes cupcake!', sentence: 'Mum made twelve cupcakes for the party.' },
+  { id: 'cw8', part1: 'bed', part2: 'room', compound: 'bedroom', emoji1: '🛏️', emoji2: '🚪', emojiResult: '🛏️', audioText: 'bed plus room makes bedroom!', sentence: 'Tidy your bedroom before dinner.' },
+  { id: 'cw9', part1: 'bath', part2: 'room', compound: 'bathroom', emoji1: '🛁', emoji2: '🚪', emojiResult: '🚿', audioText: 'bath plus room makes bathroom!', sentence: 'Wash your hands in the bathroom sink.' },
+  { id: 'cw10', part1: 'play', part2: 'ground', compound: 'playground', emoji1: '🎮', emoji2: '⬇️', emojiResult: '🛝', audioText: 'play plus ground makes playground!', sentence: 'We ran to the playground after school.' },
+  { id: 'cw11', part1: 'tooth', part2: 'brush', compound: 'toothbrush', emoji1: '🦷', emoji2: '🖌️', emojiResult: '🪥', audioText: 'tooth plus brush makes toothbrush!', sentence: 'Use your toothbrush twice every day.' },
+  { id: 'cw12', part1: 'fire', part2: 'truck', compound: 'firetruck', emoji1: '🔥', emoji2: '🚛', emojiResult: '🚒', audioText: 'fire plus truck makes firetruck!', sentence: 'The firetruck raced to put out the fire.' },
+  { id: 'cw13', part1: 'bird', part2: 'house', compound: 'birdhouse', emoji1: '🐦', emoji2: '🏠', emojiResult: '🏠', audioText: 'bird plus house makes birdhouse!', sentence: 'Dad built a little birdhouse for the garden.' },
+  { id: 'cw14', part1: 'air', part2: 'plane', compound: 'aeroplane', emoji1: '💨', emoji2: '✈️', emojiResult: '✈️', audioText: 'air plus plane makes aeroplane!', sentence: 'The aeroplane flew high above the clouds.' },
+  { id: 'cw15', part1: 'book', part2: 'worm', compound: 'bookworm', emoji1: '📚', emoji2: '🐛', emojiResult: '📚', audioText: 'book plus worm makes bookworm!', sentence: 'She is a real bookworm — she reads every day!' },
+];
+
+// ─── Coins & Money ────────────────────────────────────────────────────────────
+export interface CoinItem {
+  id: string;
+  name: string;
+  value: number;
+  emoji: string;
+  color: string;
+  audioText: string;
+  description: string;
+  funFact: string;
+}
+export const coinsData: CoinItem[] = [
+  { id: 'penny', name: 'Penny', value: 1, emoji: '🟤', color: '#b87333', audioText: 'This is a penny — worth 1 cent!', description: 'A penny is worth 1 cent. It is the smallest amount of money.', funFact: 'A penny is copper-coloured and is the least valuable coin. You need 100 pennies to make one pound or one dollar!' },
+  { id: 'nickel', name: 'Nickel', value: 5, emoji: '⚪', color: '#a8a8a8', audioText: 'This is a nickel — worth 5 cents!', description: 'A nickel is worth 5 cents. It is the same as five pennies.', funFact: 'A nickel is silver-coloured and thicker than a penny. Five nickels make 25 cents and 20 nickels make one dollar!' },
+  { id: 'dime', name: 'Dime', value: 10, emoji: '⚪', color: '#c0c0c0', audioText: 'This is a dime — worth 10 cents!', description: 'A dime is worth 10 cents. It is the same as ten pennies or two nickels.', funFact: 'A dime is actually the smallest and thinnest coin even though it is worth more than a penny or nickel. Ten dimes make one dollar!' },
+  { id: 'quarter', name: 'Quarter', value: 25, emoji: '⚪', color: '#d4d4d4', audioText: 'This is a quarter — worth 25 cents!', description: 'A quarter is worth 25 cents — that is one quarter of a dollar!', funFact: 'A quarter is worth 25 cents because four of them make 100 cents — one whole dollar. Quarter means one fourth of something!' },
+  { id: 'pound', name: '1 Pound', value: 100, emoji: '🟡', color: '#d4af37', audioText: 'This is a pound coin — worth 100 pence!', description: 'A pound coin is worth 100 pence. It is gold and silver coloured.', funFact: 'The British pound coin has a different design each year! It has a shiny gold outer ring and a silver inner part. 100 pennies make one pound.' },
+  { id: '50p', name: '50 Pence', value: 50, emoji: '⚪', color: '#a8a8a8', audioText: 'This is a 50 pence coin — worth 50p!', description: 'The 50p coin is worth 50 pence — that is half a pound!', funFact: 'The 50p coin is a heptagon — it has seven sides! That makes it easy to feel in your pocket. Two 50p coins make one pound.' },
+  { id: '20p', name: '20 Pence', value: 20, emoji: '⚪', color: '#c0c0c0', audioText: 'This is a 20 pence coin — worth 20p!', description: 'The 20p coin is worth 20 pence. It has seven sides like the 50p.', funFact: 'The 20p coin is also a heptagon! Five 20p coins make one pound.' },
+  { id: '10p', name: '10 Pence', value: 10, emoji: '⚪', color: '#b0b0b0', audioText: 'This is a 10 pence coin — worth 10p!', description: 'The 10p coin is worth 10 pence. Ten of them make one pound.', funFact: 'The 10p coin is round and silver. It has a lion on one side in the UK. Ten 10p coins make one pound — that is a lot of coins!' },
+];
+
+// ─── Plants & Life Cycles ─────────────────────────────────────────────────────
+export interface PlantStage {
+  stage: number;
+  name: string;
+  emoji: string;
+  description: string;
+}
+export interface PlantItem {
+  id: string;
+  name: string;
+  emoji: string;
+  audioText: string;
+  stages: PlantStage[];
+  funFact: string;
+}
+export const plantsData: PlantItem[] = [
+  {
+    id: 'flower',
+    name: 'Flower',
+    emoji: '🌸',
+    audioText: 'Let us watch a flower grow!',
+    stages: [
+      { stage: 1, name: 'Seed', emoji: '🌰', description: 'A tiny seed is planted in the soil.' },
+      { stage: 2, name: 'Sprout', emoji: '🌱', description: 'The seed drinks water and pushes a little shoot up.' },
+      { stage: 3, name: 'Seedling', emoji: '🪴', description: 'Green leaves grow and reach for the sunlight.' },
+      { stage: 4, name: 'Bud', emoji: '🌿', description: 'A small bud forms — the flower is getting ready!' },
+      { stage: 5, name: 'Flower', emoji: '🌸', description: 'The bud opens into a beautiful flower!' },
+      { stage: 6, name: 'Seeds again', emoji: '💨', description: 'The flower makes new seeds that fly away to grow again.' },
+    ],
+    funFact: 'Flowers need four things to grow: soil, water, sunlight, and air. Bees visit flowers to collect nectar and help flowers make new seeds!',
+  },
+  {
+    id: 'tree',
+    name: 'Tree',
+    emoji: '🌳',
+    audioText: 'Let us watch a tree grow!',
+    stages: [
+      { stage: 1, name: 'Seed/Nut', emoji: '🌰', description: 'An acorn or seed falls to the ground.' },
+      { stage: 2, name: 'Germination', emoji: '🌱', description: 'The seed cracks open and sends roots down into the earth.' },
+      { stage: 3, name: 'Sapling', emoji: '🎋', description: 'A thin young tree called a sapling grows upward.' },
+      { stage: 4, name: 'Young tree', emoji: '🌲', description: 'The trunk gets thicker and branches spread out.' },
+      { stage: 5, name: 'Mature tree', emoji: '🌳', description: 'The fully grown tree has lots of leaves and provides shade and homes for animals.' },
+    ],
+    funFact: 'Some trees can live for thousands of years! The oldest tree in the world is a bristlecone pine called Methuselah and it is nearly 5,000 years old!',
+  },
+  {
+    id: 'sunflower',
+    name: 'Sunflower',
+    emoji: '🌻',
+    audioText: 'Let us watch a sunflower grow!',
+    stages: [
+      { stage: 1, name: 'Seed', emoji: '🫘', description: 'A sunflower seed is planted in warm sunny soil.' },
+      { stage: 2, name: 'Sprout', emoji: '🌱', description: 'Two small leaves push up through the soil.' },
+      { stage: 3, name: 'Stem grows', emoji: '🪴', description: 'The stem shoots up fast — sunflowers can grow very tall!' },
+      { stage: 4, name: 'Bud forms', emoji: '🌿', description: 'A big round bud appears at the top of the stem.' },
+      { stage: 5, name: 'Flower blooms', emoji: '🌻', description: 'The bud opens into a huge yellow sunflower facing the sun.' },
+      { stage: 6, name: 'Seeds form', emoji: '🌰', description: 'The centre of the flower fills with hundreds of new seeds!' },
+    ],
+    funFact: 'Sunflowers are amazing — young sunflowers actually track the sun across the sky! In the morning they face east and in the evening they face west.',
+  },
+];
+
+// ─── Animals & Their Homes ────────────────────────────────────────────────────
+export interface AnimalHomeItem {
+  id: string;
+  animal: string;
+  animalEmoji: string;
+  home: string;
+  homeEmoji: string;
+  audioText: string;
+  description: string;
+  funFact: string;
+}
+export const animalHomesData: AnimalHomeItem[] = [
+  { id: 'ah1', animal: 'Bird', animalEmoji: '🐦', home: 'Nest', homeEmoji: '🪺', audioText: 'A bird lives in a nest!', description: 'Birds build nests from twigs, leaves, and feathers to keep their eggs safe and warm.', funFact: 'Birds weave their nests using just their beaks and feet — no hands! Some nests are so strong they can hold a child\'s weight.' },
+  { id: 'ah2', animal: 'Bee', animalEmoji: '🐝', home: 'Hive', homeEmoji: '🏠', audioText: 'A bee lives in a hive!', description: 'Thousands of bees live together in a hive made of perfect hexagon-shaped wax cells.', funFact: 'A beehive can hold up to 80,000 bees all living and working together! They store honey in the wax cells to eat during winter.' },
+  { id: 'ah3', animal: 'Fish', animalEmoji: '🐟', home: 'Ocean / River', homeEmoji: '🌊', audioText: 'A fish lives in water!', description: 'Fish live in rivers, lakes, and oceans. They breathe through gills instead of lungs.', funFact: 'There are over 30,000 different species of fish in the world! Some fish live in freezing cold polar waters and some live in scorching hot volcanic vents.' },
+  { id: 'ah4', animal: 'Fox', animalEmoji: '🦊', home: 'Den', homeEmoji: '🕳️', audioText: 'A fox lives in a den!', description: 'A fox digs a cosy underground hole called a den where it sleeps and raises its baby cubs.', funFact: 'A baby fox is called a cub or kit. Fox families are called a skull or an earth. Foxes are very clever and can even remember where they buried food!' },
+  { id: 'ah5', animal: 'Bear', animalEmoji: '🐻', home: 'Cave / Den', homeEmoji: '🏔️', audioText: 'A bear lives in a cave!', description: 'Bears shelter in caves or dens during winter where they sleep through the cold months.', funFact: 'Bears hibernate in winter — they sleep for up to 7 months! During this time they do not eat, drink, or go to the toilet. Their heartbeat slows right down to save energy.' },
+  { id: 'ah6', animal: 'Rabbit', animalEmoji: '🐰', home: 'Burrow', homeEmoji: '🕳️', audioText: 'A rabbit lives in a burrow!', description: 'Rabbits dig tunnels underground called burrows where they stay safe from predators.', funFact: 'A group of rabbit burrows connected together is called a warren. Some warrens have been used by rabbit families for hundreds of years and have hundreds of tunnels!' },
+  { id: 'ah7', animal: 'Spider', animalEmoji: '🕷️', home: 'Web', homeEmoji: '🕸️', audioText: 'A spider lives in a web!', description: 'Spiders spin silk webs to catch insects for food and to shelter their eggs.', funFact: 'Spider silk is incredibly strong — stronger than steel wire of the same thickness! Spiders make up to seven different types of silk for different purposes.' },
+  { id: 'ah8', animal: 'Lion', animalEmoji: '🦁', home: 'Savanna', homeEmoji: '🌅', audioText: 'A lion lives on the savanna!', description: 'Lions live on the African savanna — wide grassy plains — in family groups called prides.', funFact: 'A group of lions is called a pride and can have up to 40 lions! The females do most of the hunting while the males protect the territory.' },
+  { id: 'ah9', animal: 'Penguin', animalEmoji: '🐧', home: 'Antarctica / Coast', homeEmoji: '🧊', audioText: 'A penguin lives on ice and in the sea!', description: 'Penguins live in Antarctica and other cold coasts. They huddle together to stay warm.', funFact: 'Penguins cannot fly but they are brilliant swimmers! They can swim at 25 km/h underwater. Emperor penguins can dive deeper than 500 metres — deeper than most submarines!' },
+  { id: 'ah10', animal: 'Snail', animalEmoji: '🐌', home: 'Shell', homeEmoji: '🐚', audioText: 'A snail carries its home on its back!', description: 'A snail carries its shell everywhere — its home is always with it for protection.', funFact: 'A snail\'s shell grows with it — the snail is actually attached to the shell. If a predator breaks the shell the snail can repair it slowly using calcium from its food.' },
+  { id: 'ah11', animal: 'Bat', animalEmoji: '🦇', home: 'Cave', homeEmoji: '🏔️', audioText: 'A bat lives in a cave!', description: 'Bats roost upside down in caves, attics, and trees during the day, flying out at night.', funFact: 'Bats use a superpower called echolocation — they send out sound waves that bounce off objects so they can navigate in complete darkness. It is like having built-in sonar!' },
+  { id: 'ah12', animal: 'Ant', animalEmoji: '🐜', home: 'Anthill', homeEmoji: '⛰️', audioText: 'An ant lives in an anthill!', description: 'Ants build complex underground cities called anthills with tunnels, nurseries, and food stores.', funFact: 'An ant can carry up to 50 times its own body weight! If humans could do the same, you could lift a car. Some ant colonies have millions of ants all working together.' },
+];
+
+// ─── Word Problems ────────────────────────────────────────────────────────────
+export interface WordProblem {
+  id: string;
+  emoji: string;
+  story: string;
+  question: string;
+  answer: number;
+  options: number[];
+  working: string;
+  audioText: string;
+  level: 1 | 2 | 3;
+}
+export const wordProblemsData: WordProblem[] = [
+  // Level 1 — very simple addition
+  { id: 'wp1', emoji: '🍎', story: 'Tom has 3 apples. Mum gives him 2 more apples.', question: 'How many apples does Tom have now?', answer: 5, options: [4,5,6,3], working: '3 + 2 = 5', audioText: 'Tom has 3 apples. Mum gives him 2 more. How many now?', level: 1 },
+  { id: 'wp2', emoji: '🐶', story: 'There are 4 dogs in the park. 3 more dogs arrive.', question: 'How many dogs are in the park now?', answer: 7, options: [6,7,8,5], working: '4 + 3 = 7', audioText: 'There are 4 dogs. 3 more arrive. How many now?', level: 1 },
+  { id: 'wp3', emoji: '🎈', story: 'Sam had 6 balloons. One popped!', question: 'How many balloons does Sam have now?', answer: 5, options: [4,5,6,7], working: '6 - 1 = 5', audioText: 'Sam had 6 balloons. One popped! How many now?', level: 1 },
+  { id: 'wp4', emoji: '🍪', story: 'There are 8 cookies on a plate. Ben eats 3.', question: 'How many cookies are left?', answer: 5, options: [4,5,6,3], working: '8 - 3 = 5', audioText: 'There are 8 cookies. Ben eats 3. How many are left?', level: 1 },
+  { id: 'wp5', emoji: '⭐', story: 'Lily draws 2 stars. Then she draws 4 more stars.', question: 'How many stars did Lily draw altogether?', answer: 6, options: [5,6,7,8], working: '2 + 4 = 6', audioText: 'Lily draws 2 stars then 4 more. How many altogether?', level: 1 },
+  // Level 2 — slightly harder
+  { id: 'wp6', emoji: '🐟', story: 'There are 10 fish in a tank. 4 fish swim away.', question: 'How many fish are left in the tank?', answer: 6, options: [5,6,7,8], working: '10 - 4 = 6', audioText: 'There are 10 fish. 4 swim away. How many are left?', level: 2 },
+  { id: 'wp7', emoji: '🌸', story: 'Anya picks 5 red flowers and 3 yellow flowers.', question: 'How many flowers did Anya pick altogether?', answer: 8, options: [7,8,9,6], working: '5 + 3 = 8', audioText: 'Anya picks 5 red and 3 yellow flowers. How many altogether?', level: 2 },
+  { id: 'wp8', emoji: '🚗', story: 'There are 9 cars in a car park. 5 cars drive away.', question: 'How many cars are left in the car park?', answer: 4, options: [3,4,5,6], working: '9 - 5 = 4', audioText: 'There are 9 cars. 5 drive away. How many are left?', level: 2 },
+  { id: 'wp9', emoji: '🦋', story: 'Jake saw 4 butterflies in the morning and 6 in the afternoon.', question: 'How many butterflies did Jake see in total?', answer: 10, options: [8,9,10,11], working: '4 + 6 = 10', audioText: 'Jake saw 4 butterflies then 6 more. How many in total?', level: 2 },
+  { id: 'wp10', emoji: '📚', story: 'A shelf has 10 books. Nia borrows 3 books.', question: 'How many books are still on the shelf?', answer: 7, options: [6,7,8,5], working: '10 - 3 = 7', audioText: 'A shelf has 10 books. Nia borrows 3. How many are left?', level: 2 },
+  // Level 3 — two-step or slightly larger numbers
+  { id: 'wp11', emoji: '🍭', story: 'A bag has 12 sweets. Mia eats 4 sweets and gives 3 to her brother.', question: 'How many sweets are left in the bag?', answer: 5, options: [4,5,6,7], working: '12 - 4 - 3 = 5', audioText: 'A bag has 12 sweets. Mia eats 4 and gives away 3. How many are left?', level: 3 },
+  { id: 'wp12', emoji: '🐣', story: 'A hen has 15 eggs. 6 eggs hatch into chicks.', question: 'How many eggs have not hatched yet?', answer: 9, options: [8,9,10,7], working: '15 - 6 = 9', audioText: 'A hen has 15 eggs. 6 hatch. How many have not hatched?', level: 3 },
+  { id: 'wp13', emoji: '🎯', story: 'In a game, Zara scores 7 points then scores 8 more points.', question: 'What is Zara\'s total score?', answer: 15, options: [13,14,15,16], working: '7 + 8 = 15', audioText: 'Zara scores 7 points then 8 more. What is the total?', level: 3 },
+  { id: 'wp14', emoji: '🌳', story: 'A garden has 18 trees. A storm blows down 9 trees.', question: 'How many trees are still standing?', answer: 9, options: [8,9,10,7], working: '18 - 9 = 9', audioText: 'A garden has 18 trees. 9 blow down. How many are left?', level: 3 },
+];
+
+// ─── Fact Families ────────────────────────────────────────────────────────────
+export interface FactFamily {
+  id: string;
+  a: number;
+  b: number;
+  sum: number;
+  emoji: string;
+  audioText: string;
+}
+export const factFamiliesData: FactFamily[] = [
+  ...[
+    [2,3],[1,4],[2,5],[3,4],[1,6],[2,6],[3,5],[1,7],[2,7],[3,6],[4,5],
+    [1,8],[2,8],[3,7],[4,6],[1,9],[2,9],[3,8],[4,7],[5,6],
+  ].map(([a,b], i) => {
+    const emojis = ['⭐','🍎','🎈','🐟','🌸','❤️','🦋','🍪','🎾','☀️'];
+    return { id: `ff-${a}-${b}`, a, b, sum: a+b, emoji: emojis[i%emojis.length], audioText: `${a} plus ${b} equals ${a+b}. Can you find all four facts?` };
+  }),
+];

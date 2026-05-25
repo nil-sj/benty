@@ -1,0 +1,59 @@
+.container { width: 100%; max-width: 760px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+
+/* Challenge selector */
+.challengeBar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.challengeBtn { padding: 8px 14px; border-radius: var(--radius-lg); border: 3px solid var(--color-border); background: var(--color-white); font-size: 1.2rem; cursor: pointer; transition: all 0.15s; }
+.challengeBtn:hover { border-color: var(--color-sky); transform: translateY(-2px); }
+.challengeActive { border-color: var(--color-sky) !important; background: var(--color-sky-light) !important; }
+
+.title { font-family: var(--font-display); font-size: clamp(1.3rem, 4vw, 2rem); color: var(--color-text-primary); text-align: center; margin: 0; }
+.instruction { font-weight: 700; font-size: 0.95rem; color: var(--color-text-secondary); text-align: center; margin: 0; }
+.selectedHint { font-weight: 700; font-size: 0.9rem; color: var(--color-sky); text-align: center; background: var(--color-sky-light); padding: 6px 16px; border-radius: var(--radius-lg); border: 2px solid var(--color-sky); }
+
+/* Baskets */
+.baskets { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; }
+.basket { min-height: 120px; border-radius: var(--radius-xl); border: 3px dashed var(--color-border); background: var(--color-bg); display: flex; flex-direction: column; align-items: center; padding: 12px; gap: 6px; cursor: pointer; transition: all 0.18s; position: relative; }
+.basketActive { border-color: var(--color-sky); background: var(--color-sky-light); transform: scale(1.02); }
+.basket:hover { border-color: var(--color-sky); }
+.basketEmoji { font-size: 2rem; }
+.basketLabel { font-family: var(--font-display); font-size: clamp(1rem, 3vw, 1.4rem); color: var(--color-text-primary); }
+.basketItems { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; }
+.sortedItem { font-size: 1.6rem; animation: popIn 0.25s ease; }
+.basketCount { position: absolute; top: 6px; right: 10px; font-family: var(--font-display); font-size: 1rem; color: var(--color-sky); background: var(--color-white); border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--color-sky); }
+
+/* Item pool */
+.itemsPool { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 12px; background: var(--color-white); border-radius: var(--radius-xl); border: 3px solid var(--color-border); width: 100%; box-shadow: var(--shadow-card); }
+.sortItem { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 14px; background: var(--color-white); border: 3px solid var(--color-border); border-radius: var(--radius-lg); cursor: pointer; transition: all 0.15s; min-width: 72px; box-shadow: var(--shadow-button); }
+.sortItem:hover { border-color: var(--color-sky); transform: translateY(-3px); box-shadow: var(--shadow-button-hover); }
+.sortItemSelected { border-color: var(--color-sky) !important; background: var(--color-sky-light) !important; transform: scale(1.08) translateY(-4px) !important; box-shadow: 0 8px 20px rgba(110,198,245,0.35) !important; }
+.sortItemWrong { border-color: var(--color-coral) !important; background: #fff5f5 !important; animation: wiggle 0.4s ease; }
+.sortEmoji { font-size: 1.8rem; }
+.sortName { font-weight: 800; font-size: 0.8rem; color: var(--color-text-secondary); }
+
+/* Celebration */
+.celebration { width: 100%; font-family: var(--font-display); font-size: clamp(1rem, 3.5vw, 1.5rem); text-align: center; padding: 16px 20px; background: var(--color-white); border-radius: var(--radius-xl); border: 3px solid var(--color-sun); box-shadow: var(--shadow-card); animation: bounce-in 0.5s ease; }
+
+/* Sentence builder */
+.levelBar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.levelBtn { padding: 8px 16px; border-radius: var(--radius-lg); border: 3px solid var(--color-border); background: var(--color-white); font-family: var(--font-body); font-weight: 800; font-size: 0.85rem; cursor: pointer; transition: all 0.15s; }
+.levelBtn:hover { border-color: var(--color-sky); }
+.levelActive { background: var(--color-sky) !important; border-color: var(--color-sky) !important; color: white !important; }
+
+.score { font-family: var(--font-display); font-size: 1.1rem; background: var(--color-white); padding: 6px 20px; border-radius: var(--radius-lg); border: 3px solid var(--color-sun); }
+
+.buildArea { min-height: 72px; width: 100%; background: var(--color-white); border: 3px dashed var(--color-sky); border-radius: var(--radius-xl); padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; transition: all 0.2s; }
+.buildCorrect { border-color: var(--color-mint) !important; background: #f0fff4 !important; animation: bounce-in 0.4s ease; }
+.buildWrong { border-color: var(--color-coral) !important; background: #fff5f5 !important; }
+.buildPlaceholder { font-weight: 600; font-size: 0.9rem; color: var(--color-border); width: 100%; text-align: center; }
+.builtWord { padding: 8px 14px; background: var(--color-sky-light); border: 2px solid var(--color-sky); border-radius: var(--radius-md); font-family: var(--font-display); font-size: clamp(0.95rem, 2.5vw, 1.2rem); color: var(--color-text-primary); cursor: pointer; transition: all 0.12s; }
+.builtWord:hover { background: #ffeaea; border-color: var(--color-coral); }
+
+.wrongHint { width: 100%; text-align: center; font-weight: 700; font-size: 0.9rem; color: var(--color-coral); background: #fff5f5; padding: 10px 14px; border-radius: var(--radius-md); border: 2px solid var(--color-coral); }
+
+.wordPool { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 14px; background: var(--color-bg); border-radius: var(--radius-xl); border: 2px solid var(--color-border); width: 100%; }
+.poolWord { padding: 10px 18px; background: var(--color-white); border: 3px solid var(--color-lavender); border-radius: var(--radius-lg); font-family: var(--font-display); font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--color-text-primary); cursor: pointer; transition: all 0.15s; box-shadow: var(--shadow-button); }
+.poolWord:hover { background: #f5eeff; transform: translateY(-2px); box-shadow: var(--shadow-button-hover); }
+
+.retryBtn { padding: 10px 24px; background: var(--color-white); border: 3px solid var(--color-border); border-radius: var(--radius-lg); font-family: var(--font-body); font-weight: 800; font-size: 0.9rem; cursor: pointer; transition: all 0.15s; }
+.retryBtn:hover { border-color: var(--color-sky); }
+.hint { font-size: 0.82rem; font-weight: 600; color: var(--color-text-secondary); text-align: center; }

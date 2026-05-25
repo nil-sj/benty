@@ -34,7 +34,25 @@ export type ComponentType =
   | 'senses'
   | 'directions'
   | 'sizes'
-  | 'healthy-eating';
+  | 'healthy-eating'
+  | 'number-bonds'
+  | 'ordinal-numbers'
+  | 'skip-counting'
+  | 'place-value'
+  | 'syllables'
+  | 'digraphs'
+  | 'long-vowels'
+  | 'grammar-basics'
+  | 'category-sort'
+  | 'sentence-builder'
+  | 'number-line'
+  | 'one-more-less'
+  | 'compound-words'
+  | 'coins'
+  | 'plants'
+  | 'animal-homes'
+  | 'word-problems'
+  | 'fact-families';
 
 export type NavigationMode = 'sequential' | 'random';
 export type LayoutMode = 'single-column' | 'two-column' | 'grid' | 'canvas' | 'quiz' | 'matching' | 'music-album';
@@ -723,6 +741,123 @@ export const activities: ActivityConfig[] = [
     voiceEnabled: true,
   },
 
+  // ── Mathematics: extended ──
+  {
+    id: 'number-bonds', title: 'Number Bonds', category: 'Mathematics', icon: '🔗',
+    description: 'What two numbers make 10? Learn number bonds!',
+    route: '/activity/number-bonds', componentType: 'number-bonds' as const,
+    dataSource: 'bonds', navigationMode: 'random' as const, layout: 'quiz' as const, voiceEnabled: true,
+  },
+  {
+    id: 'ordinal-numbers', title: 'Ordinal Numbers', category: 'Mathematics', icon: '🥇',
+    description: '1st, 2nd, 3rd — learn what position things are in!',
+    route: '/activity/ordinal-numbers', componentType: 'ordinal-numbers' as const,
+    dataSource: 'ordinals', navigationMode: 'sequential' as const, layout: 'single-column' as const, voiceEnabled: true,
+  },
+  {
+    id: 'skip-counting', title: 'Skip Counting', category: 'Mathematics', icon: '🦘',
+    description: 'Count in 2s, 5s, and 10s — a maths superpower!',
+    route: '/activity/skip-counting', componentType: 'skip-counting' as const,
+    dataSource: 'skip', navigationMode: 'sequential' as const, layout: 'single-column' as const, voiceEnabled: true,
+  },
+  {
+    id: 'place-value', title: 'Tens and Ones', category: 'Mathematics', icon: '🔢',
+    description: 'How many tens and ones make up a number?',
+    route: '/activity/place-value', componentType: 'place-value' as const,
+    dataSource: 'place', navigationMode: 'random' as const, layout: 'quiz' as const, voiceEnabled: true,
+  },
+  // ── Words & Reading: extended ──
+  {
+    id: 'syllables', title: 'Clap the Syllables', category: 'Words & Reading', icon: '👏',
+    description: 'Clap out the beats in every word — cat has 1, banana has 3!',
+    route: '/activity/syllables', componentType: 'syllables' as const,
+    dataSource: 'syllables', navigationMode: 'sequential' as const, layout: 'single-column' as const, voiceEnabled: true,
+  },
+  {
+    id: 'digraphs', title: 'Two-Letter Sounds', category: 'Early Reading', icon: '🔤',
+    description: 'ch, sh, th, wh, ph — two letters making one sound!',
+    route: '/activity/digraphs', componentType: 'digraphs' as const,
+    dataSource: 'digraphs', navigationMode: 'sequential' as const, layout: 'single-column' as const, voiceEnabled: true,
+  },
+  {
+    id: 'long-vowels', title: 'Magic E — Long Vowels', category: 'Early Reading', icon: '✨',
+    description: 'A silent E at the end changes the vowel sound — cake, bike, home!',
+    route: '/activity/long-vowels', componentType: 'long-vowels' as const,
+    dataSource: 'longvowels', navigationMode: 'sequential' as const, layout: 'single-column' as const, voiceEnabled: true,
+  },
+  {
+    id: 'grammar-basics', title: 'Grammar Basics', category: 'Words & Reading', icon: '📝',
+    description: 'Nouns, verbs, adjectives — the building blocks of sentences!',
+    route: '/activity/grammar-basics', componentType: 'grammar-basics' as const,
+    dataSource: 'grammar', navigationMode: 'sequential' as const, layout: 'single-column' as const, voiceEnabled: true,
+  },
+  // ── Interactive games ──
+  {
+    id: 'category-sort', title: 'Sort It Out!', category: 'Games & Puzzles', icon: '🗂️',
+    description: 'Tap each picture and sort it into the right group!',
+    route: '/activity/category-sort', componentType: 'category-sort' as const,
+    dataSource: 'sorting', navigationMode: 'random' as const, layout: 'quiz' as const, voiceEnabled: true,
+  },
+  {
+    id: 'sentence-builder', title: 'Build a Sentence', category: 'Words & Reading', icon: '🧩',
+    description: 'Tap the words in the right order to build a sentence!',
+    route: '/activity/sentence-builder', componentType: 'sentence-builder' as const,
+    dataSource: 'sentences', navigationMode: 'random' as const, layout: 'quiz' as const, voiceEnabled: true,
+  },
+
+  // ── More Mathematics ──
+  {
+    id: 'number-line', title: 'Number Line', category: 'Mathematics', icon: '📏',
+    description: 'Find numbers in the right place on the number line!',
+    route: '/activity/number-line', componentType: 'number-line' as const,
+    dataSource: 'numberline', navigationMode: 'random' as const, layout: 'quiz' as const, voiceEnabled: true,
+  },
+  {
+    id: 'one-more-less', title: 'One More, One Less', category: 'Mathematics', icon: '🔼',
+    description: 'What is one more? What is one less? Build number sense!',
+    route: '/activity/one-more-less', componentType: 'one-more-less' as const,
+    dataSource: 'onemoreone', navigationMode: 'random' as const, layout: 'quiz' as const, voiceEnabled: true,
+  },
+  {
+    id: 'word-problems', title: 'Word Problems', category: 'Mathematics', icon: '📖',
+    description: 'Read a little story and solve the maths puzzle inside!',
+    route: '/activity/word-problems', componentType: 'word-problems' as const,
+    dataSource: 'wordproblems', navigationMode: 'random' as const, layout: 'quiz' as const, voiceEnabled: true,
+  },
+  {
+    id: 'fact-families', title: 'Fact Families', category: 'Mathematics', icon: '🔁',
+    description: '3 + 4 = 7, 4 + 3 = 7, 7 - 3 = 4 — four facts from three numbers!',
+    route: '/activity/fact-families', componentType: 'fact-families' as const,
+    dataSource: 'factfamilies', navigationMode: 'random' as const, layout: 'quiz' as const, voiceEnabled: true,
+  },
+  // ── More Words & Reading ──
+  {
+    id: 'compound-words', title: 'Compound Words', category: 'Words & Reading', icon: '🔗',
+    description: 'rain + bow = rainbow! Discover how two words make one!',
+    route: '/activity/compound-words', componentType: 'compound-words' as const,
+    dataSource: 'compound', navigationMode: 'sequential' as const, layout: 'single-column' as const, voiceEnabled: true,
+  },
+  // ── Science & Nature ──
+  {
+    id: 'plants', title: 'Plants & Life Cycles', category: 'Science & Nature', icon: '🌱',
+    description: 'From tiny seed to tall tree — watch plants grow step by step!',
+    route: '/activity/plants', componentType: 'plants' as const,
+    dataSource: 'plants', navigationMode: 'sequential' as const, layout: 'single-column' as const, voiceEnabled: true,
+  },
+  {
+    id: 'animal-homes', title: 'Animals & Their Homes', category: 'Science & Nature', icon: '🏠',
+    description: 'Where does a bee live? Where does a fox sleep? Find out!',
+    route: '/activity/animal-homes', componentType: 'animal-homes' as const,
+    dataSource: 'animalhomes', navigationMode: 'sequential' as const, layout: 'two-column' as const, voiceEnabled: true,
+  },
+  // ── Learn Basics ──
+  {
+    id: 'coins', title: 'Coins & Money', category: 'Learn Basics', icon: '🪙',
+    description: 'Pennies, nickels, dimes — learn to recognise every coin!',
+    route: '/activity/coins', componentType: 'coins' as const,
+    dataSource: 'coins', navigationMode: 'sequential' as const, layout: 'single-column' as const, voiceEnabled: true,
+  },
+
 ];
 
 export const categories = [
@@ -734,6 +869,7 @@ export const categories = [
   { name: 'Words & Reading', icon: '📖', color: 'var(--cat-words)' },
   { name: 'Mathematics', icon: '🔢', color: '#22C55E' },
   { name: 'Early Reading', icon: '📗', color: '#F59E0B' },
+  { name: 'Science & Nature', icon: '🔬', color: '#10B981' },
 ];
 
 export function getActivityById(id: string): ActivityConfig | undefined {

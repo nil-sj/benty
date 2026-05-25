@@ -23,50 +23,71 @@ import { TellTimeActivity } from '../activities/TellTimeActivity';
 import { PhonicsActivity } from '../activities/PhonicsActivity';
 import { CVCWordActivity, SentenceReaderActivity, StoryTimeActivity } from '../activities/ReadingActivity';
 import { EmotionsActivity, WeatherActivity, FamilyActivity, RoutinesActivity, NatureColorsActivity, SensesActivity, DirectionsActivity, SizesActivity, HealthyEatingActivity } from '../activities/TopicActivity';
+import { NumberBondsActivity, OrdinalNumbersActivity, SkipCountingActivity, PlaceValueActivity } from '../activities/MathExtra';
+import { SyllableActivity, DigraphsActivity, LongVowelsActivity, GrammarActivity } from '../activities/LiteracyExtra';
+import { CategorySortActivity, SentenceBuilderActivity } from '../activities/DragActivity';
+import { NumberLineActivity, OneMoreLessActivity, CompoundWordsActivity, CoinsActivity } from '../activities/NewMathActivity';
+import { PlantsActivity, AnimalHomesActivity, WordProblemsActivity, FactFamiliesActivity } from '../activities/ScienceActivity';
 import type { ActivityConfig, ComponentType } from '../../data/activities';
 import { useProgress } from '../../context/ProgressContext';
 import styles from './ActivityLoader.module.css';
 
-type ComponentMap = {
-  [K in ComponentType]?: React.ComponentType<{ config: ActivityConfig }>;
-};
+type ComponentMap = { [K in ComponentType]?: React.ComponentType<{ config: ActivityConfig }> };
 
 const activityComponentMap: ComponentMap = {
-  'flashcard-sequential': SequentialFlashcardActivity,
-  'flashcard-random': RandomFlashcardActivity,
-  'progressive-list': ProgressiveListActivity,
-  'counting': CountingActivity,
-  'music-album': MusicAlbumActivity,
-  'drawing-canvas': DrawingCanvasActivity,
-  'multiple-choice-quiz': MultipleChoiceQuizActivity,
-  'sight-word': SightWordActivity,
-  'word-spinner': WordSpinnerActivity,
-  'missing-letter': MissingLetterActivity,
-  'odd-man-out': OddManOutActivity,
-  'matching': MatchingGameActivity,
-  'animal-sounds': AnimalSoundsActivity,
-  'memory-card': MemoryCardGame,
-  'rhyme-finder': RhymeFinderActivity,
-  'first-letter': FirstLetterActivity,
-  'opposites': OppositesActivity,
-  'addition': AdditionActivity,
-  'subtraction': AdditionActivity, // reuses same component, config.dataSource differentiates
-  'compare': CompareActivity,
-  'pattern': PatternActivity,
-  'tell-time': TellTimeActivity,
-  'phonics': PhonicsActivity,
-  'cvc-words': CVCWordActivity,
-  'sentence-reader': SentenceReaderActivity,
-  'story-time': StoryTimeActivity,
-  'emotions': EmotionsActivity,
-  'weather': WeatherActivity,
-  'family': FamilyActivity,
-  'routines': RoutinesActivity,
-  'nature-colors': NatureColorsActivity,
-  'senses': SensesActivity,
-  'directions': DirectionsActivity,
-  'sizes': SizesActivity,
-  'healthy-eating': HealthyEatingActivity,
+  'flashcard-sequential':   SequentialFlashcardActivity,
+  'flashcard-random':       RandomFlashcardActivity,
+  'progressive-list':       ProgressiveListActivity,
+  'counting':               CountingActivity,
+  'music-album':            MusicAlbumActivity,
+  'drawing-canvas':         DrawingCanvasActivity,
+  'multiple-choice-quiz':   MultipleChoiceQuizActivity,
+  'sight-word':             SightWordActivity,
+  'word-spinner':           WordSpinnerActivity,
+  'missing-letter':         MissingLetterActivity,
+  'odd-man-out':            OddManOutActivity,
+  'matching':               MatchingGameActivity,
+  'animal-sounds':          AnimalSoundsActivity,
+  'memory-card':            MemoryCardGame,
+  'rhyme-finder':           RhymeFinderActivity,
+  'first-letter':           FirstLetterActivity,
+  'opposites':              OppositesActivity,
+  'addition':               AdditionActivity,
+  'subtraction':            AdditionActivity,
+  'compare':                CompareActivity,
+  'pattern':                PatternActivity,
+  'tell-time':              TellTimeActivity,
+  'phonics':                PhonicsActivity,
+  'cvc-words':              CVCWordActivity,
+  'sentence-reader':        SentenceReaderActivity,
+  'story-time':             StoryTimeActivity,
+  'emotions':               EmotionsActivity,
+  'weather':                WeatherActivity,
+  'family':                 FamilyActivity,
+  'routines':               RoutinesActivity,
+  'nature-colors':          NatureColorsActivity,
+  'senses':                 SensesActivity,
+  'directions':             DirectionsActivity,
+  'sizes':                  SizesActivity,
+  'healthy-eating':         HealthyEatingActivity,
+  'number-bonds':           NumberBondsActivity,
+  'ordinal-numbers':        OrdinalNumbersActivity,
+  'skip-counting':          SkipCountingActivity,
+  'place-value':            PlaceValueActivity,
+  'syllables':              SyllableActivity,
+  'digraphs':               DigraphsActivity,
+  'long-vowels':            LongVowelsActivity,
+  'grammar-basics':         GrammarActivity,
+  'category-sort':          CategorySortActivity,
+  'sentence-builder':       SentenceBuilderActivity,
+  'number-line':            NumberLineActivity,
+  'one-more-less':          OneMoreLessActivity,
+  'compound-words':         CompoundWordsActivity,
+  'coins':                  CoinsActivity,
+  'plants':                 PlantsActivity,
+  'animal-homes':           AnimalHomesActivity,
+  'word-problems':          WordProblemsActivity,
+  'fact-families':          FactFamiliesActivity,
 };
 
 export function ActivityLoader() {
@@ -100,8 +121,8 @@ function NotFound() {
   return (
     <div className={styles.comingSoon}>
       <span className={styles.comingSoonIcon}>🤔</span>
-      <h2>Hmm, we can not find that activity!</h2>
-      <p>Let us go back home and try another one.</p>
+      <h2>Hmm, we can't find that activity!</h2>
+      <p>Let's go back home and try another one.</p>
       <button onClick={() => navigate('/')} className={styles.homeBtn}>🏠 Back to Home</button>
     </div>
   );
